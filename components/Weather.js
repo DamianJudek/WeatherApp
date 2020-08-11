@@ -117,24 +117,15 @@ export default class Weather extends React.Component {
         <NextDays></NextDays>
       </View>
     );
-
-    // <View style={styles.container}>
-    //   <Image
-    //     style={{width: 20, height: 20}}
-    //     source={require('../assets/weather-icons/png/004-storm.png')}></Image>
-    // </View>
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexBasis: '100%',
     flexDirection: 'column',
     padding: 5,
     justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: 'rgba(0, 0, 0, 0.4)',
   },
   baseText: {
     fontFamily: 'Roboto',
@@ -143,15 +134,5 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 35,
-  },
-  thinText: {
-    fontWeight: '100',
-  },
-  button: {
-    paddingHorizontal: 24,
-    paddingVertical: 10,
-    backgroundColor: 'rgba(56, 149, 232, 0.6)',
-    borderRadius: 50,
-    marginVertical: 10,
   },
 });

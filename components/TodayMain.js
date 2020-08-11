@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
-import City from './City';
+
 const TodayMain = (props) => {
   const {humidity, temp, wind, description, icon} = props.weather;
   return (
@@ -9,13 +9,13 @@ const TodayMain = (props) => {
         <Text style={[styles.baseText, styles.heading]}>{props.city}</Text>
       </View>
 
-      <View style={styles.section}>
+      <View style={[styles.section, {flex: 2}]}>
         <View style={[styles.subSection, {flex: 2}]}>
           <Text style={[styles.baseText, styles.bigText]}>
             {`${temp}\u2103`}
           </Text>
         </View>
-        <View style={styles.subSection}>
+        <View style={[styles.subSection, {justifyContent: 'flex-start'}]}>
           <Image
             style={styles.bigIcon}
             resizeMode="contain"
@@ -51,20 +51,21 @@ const TodayMain = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 3,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: 'rgba(30, 30, 30, 0.4)',
+    // backgroundColor: 'rgba(0, 0, 0, 0.4)',
+
     flexDirection: 'column',
+    borderRadius: 50,
+    marginVertical: 10,
   },
   section: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // borderWidth: 2,
   },
   subSection: {
     flex: 1,
-    // borderWidth: 2,
-    // borderColor: 'cadetblue',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -89,29 +90,3 @@ const styles = StyleSheet.create({
   },
 });
 export default TodayMain;
-// <View>
-//   <View>
-//     <Text style={[styles.thinText, styles.baseText]}>
-//       {`${weather.temp} \u2103`}
-//     </Text>
-//   </View>
-//   <View>
-//     <Text style={styles.baseText}>{weather.description}</Text>
-//   </View>
-//   <View>
-//     <View>
-//       <Text
-//         style={[
-//           styles.thinText,
-//           styles.baseText,
-//         ]}>{`Wiatr: ${weather.wind} m/s`}</Text>
-//     </View>
-//     <View>
-//       <Text
-//         style={[
-//           styles.thinText,
-//           styles.baseText,
-//         ]}>{`Wilgotność: ${weather.humidity}%`}</Text>
-//     </View>
-//   </View>
-// </View>

@@ -11,13 +11,12 @@ class MainPanel extends React.Component {
   render() {
     const weather = this.props.weather;
     const weatherFetched = this.props.weatherFetched;
-    console.log(weather);
     return (
       <View style={styles.container}>
         {weatherFetched ? (
           <View style={styles.container}>
-            <TodayMain city={this.props.city} weather={this.props.weather[0]} />
-            <TodayPerHour />
+            <TodayMain city={this.props.city} weather={weather[0]} />
+            <TodayPerHour weather={weather} />
           </View>
         ) : (
           <>
@@ -42,8 +41,6 @@ const styles = StyleSheet.create({
     flex: 5,
     flexDirection: 'column',
     justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
   baseText: {
     fontFamily: 'Roboto',

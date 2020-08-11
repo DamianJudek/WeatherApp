@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'rgba(255, 0, 0, 0.3)',
+    borderRadius: 50,
+
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
 });
 export default NextDays;
