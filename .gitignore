@@ -57,3 +57,7 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Images
+./assets/weather-icons
+./assets/background-images
