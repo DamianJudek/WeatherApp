@@ -11,9 +11,10 @@ export default class Weather extends React.Component {
   state = {
     latitude: null,
     longitude: null,
+    cityName: null,
     weatherFetched: false,
     phoneLocated: false,
-    weather: [],
+    weather: {dataPerHour: []},
   };
   _apiAddress = 'http://api.openweathermap.org/data/2.5/forecast?';
   _apiKey = '15c1ecbcb9637c933c82bf1397cdf07b';
@@ -44,14 +45,12 @@ export default class Weather extends React.Component {
       const perHour = {
         temp: parseInt(data.main.temp),
         humidity: data.main.humidity,
-        main: data.weather.main,
         description: data.weather[0].description,
         wind: data.wind.speed,
         hour: data.dt_txt.substr(-8, 5),
         date: data.dt,
+        icon: data.weather[0].icon,
       };
-      console.log(perHour.hour);
-      console.log(perHour.temp);
       weather.dataPerHour.push(perHour);
     }
     this.setState({
@@ -76,7 +75,10 @@ export default class Weather extends React.Component {
         throw new Error('Błąd połączenia z api ' + error.message);
       });
   };
-  getWeather = () => {
+  handleCityInput = (e) => {
+    this.setState({cityName: e.nativeEvent.text});
+  };
+  getWeatherByCoords = () => {
     const lat = this.state.latitude;
     const lon = this.state.longitude;
     const phoneLocated = this.state.phoneLocated;
@@ -85,20 +87,33 @@ export default class Weather extends React.Component {
       this._fetchDataFromApi(query);
     }
   };
+  getWeatherByCity = () => {};
 
   componentDidMount() {
     this._getLocation();
   }
-
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.latitude !== this.state.latitude ||
+      prevState.longitude !== this.state.longitude
+    ) {
+      this.getWeatherByCoords();
+      console.log('update');
+    } else if (prevState.cityName !== this.state.cityName) {
+      console.log('Szukam po mieście');
+    }
+  }
   render() {
-    console.log(this.state.weather);
     return (
       <View style={styles.container}>
-        <Location getLocation={this._getLocation}></Location>
+        <Location
+          getLocation={this._getLocation}
+          handleCityInput={this.handleCityInput}></Location>
         <MainPanel
-          weather={
-            this.state.weather[0] ? this.state.weather[0] : {}
-          }></MainPanel>
+          weather={this.state.weather.dataPerHour.slice(0, 5)}
+          weatherFetched={this.state.weatherFetched}
+          city={this.state.weather.city}
+        />
         <NextDays></NextDays>
       </View>
     );

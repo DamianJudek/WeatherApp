@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
-
+import ASBox from './AnimatedSearchBox';
 class Location extends React.Component {
   constructor(props) {
     super(props);
@@ -9,22 +9,10 @@ class Location extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight
-          onPress={() => {}}
-          underlayColor="rgba(95, 158, 160, 0.3)"
-          style={styles.iconContainer}
-          style={styles.iconContainer}>
-          <Image
-            style={styles.icon}
-            resizeMode="contain"
-            source={require('../assets/icons/search.png')}></Image>
-        </TouchableHighlight>
-
-        <View style={styles.searchBox}></View>
+        <ASBox handleCityInput={this.props.handleCityInput}></ASBox>
         <TouchableHighlight
           onPress={this.props.getLocation}
           underlayColor="rgba(95, 158, 160, 0.3)"
-          style={styles.iconContainer}
           style={styles.iconContainer}>
           <Image
             style={styles.icon}
@@ -56,11 +44,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 5,
     backgroundColor: 'transparent',
-  },
-  searchBox: {
-    backgroundColor: 'rgba(95, 158, 160, 0.4)',
-    height: '100%',
-    width: 0,
   },
   baseText: {
     fontFamily: 'Roboto',

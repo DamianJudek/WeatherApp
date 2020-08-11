@@ -61,7 +61,7 @@ class App extends React.Component {
       <View style={styles.container}>
         <ImageBackground
           style={styles.background}
-          source={require('./assets/background-images/grass.jpg')}
+          source={require('./assets/background-images/sky.jpg')}
           resizeMode="cover">
           <Weather
             hasLocationPermission={this.state.hasLocationPermission}></Weather>
