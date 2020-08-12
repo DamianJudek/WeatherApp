@@ -37,7 +37,7 @@ export default class Weather extends React.Component {
       );
     }
   };
-  _parseWeatherData = (datas) => {
+  _parseWeatherData = (data) => {
     const weather = {};
     weather.city = datas.city.name;
     weather.dataPerHour = [];
@@ -60,19 +60,19 @@ export default class Weather extends React.Component {
   };
   _fetchDataFromApi = (url) => {
     const prevThis = this;
-    console.log(url);
+
     fetch(url)
       .then((response) => {
-        if (response.status) {
+        if (response.ok) {
           return response.json();
         }
+        throw new Error('Api returns code ' + response.status);
       })
-      .then((datas) => {
-        prevThis._parseWeatherData(datas);
-        return datas;
+      .then((data) => {
+        prevThis._parseWeatherData(data);
       })
       .catch((error) => {
-        throw new Error('Błąd połączenia z api ' + error.message);
+        console.log(error);
       });
   };
   handleCityInput = (e) => {
@@ -87,7 +87,14 @@ export default class Weather extends React.Component {
       this._fetchDataFromApi(query);
     }
   };
-  getWeatherByCity = () => {};
+  getWeatherByCity = () => {
+    if (this.state.cityName !== null) {
+      console.log('CityName:');
+      console.log(this.state.cityName);
+      let query = `${this._apiAddress}q=${this.state.cityName}&lang=PL&units=metric&appid=${this._apiKey}`;
+      this._fetchDataFromApi(query);
+    }
+  };
 
   componentDidMount() {
     this._getLocation();
@@ -100,7 +107,8 @@ export default class Weather extends React.Component {
       this.getWeatherByCoords();
       console.log('update');
     } else if (prevState.cityName !== this.state.cityName) {
-      console.log('Szukam po mieście');
+      console.log('Szukam po mieście ');
+      this.getWeatherByCity();
     }
   }
   render() {

@@ -53,6 +53,7 @@ class AnimatedSearchBox extends React.Component {
               this.props.handleCityInput(e);
               this._onPress();
             }}
+            // autoCorrect={false}
             placeholderTextColor="#fff"
             style={
               this.state.active
