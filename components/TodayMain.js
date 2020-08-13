@@ -1,27 +1,28 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
 const TodayMain = (props) => {
-  const {humidity, temp, wind, description, icon} = props.weather;
+  const { humidity, temp, wind, description, icon } = props.weather;
   return (
     <View style={styles.container}>
       <View style={styles.section}>
         <Text style={[styles.baseText, styles.heading]}>{props.city}</Text>
       </View>
 
-      <View style={[styles.section, {flex: 2}]}>
-        <View style={[styles.subSection, {flex: 2}]}>
+      <View style={[styles.section, { flex: 2 }]}>
+        <View style={[styles.subSection, { flex: 2 }]}>
           <Text style={[styles.baseText, styles.bigText]}>
             {`${temp}\u2103`}
           </Text>
         </View>
-        <View style={[styles.subSection, {justifyContent: 'flex-start'}]}>
+        <View style={[styles.subSection, { justifyContent: 'flex-start' }]}>
           <Image
             style={styles.bigIcon}
             resizeMode="contain"
             source={{
               uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
-            }}></Image>
+            }}
+          />
         </View>
       </View>
 
@@ -33,7 +34,8 @@ const TodayMain = (props) => {
           <Image
             style={styles.icon}
             resizeMode="contain"
-            source={require('../assets/icons/humidity.png')}></Image>
+            source={require('../assets/icons/humidity.png')}
+          />
           <Text
             style={[styles.baseText, styles.heading]}>{`${humidity}%`}</Text>
         </View>
@@ -41,7 +43,8 @@ const TodayMain = (props) => {
           <Image
             style={styles.icon}
             resizeMode="contain"
-            source={require('../assets/icons/wind.png')}></Image>
+            source={require('../assets/icons/wind.png')}
+          />
           <Text style={[styles.baseText, styles.heading]}>{`${wind}m/s`}</Text>
         </View>
       </View>

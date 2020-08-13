@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
+import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import ASBox from './AnimatedSearchBox';
 class Location extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Location extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ASBox handleCityInput={this.props.handleCityInput}></ASBox>
+        <ASBox handleCityInput={this.props.handleCityInput} />
         <TouchableHighlight
           onPress={this.props.getLocation}
           underlayColor="rgba(95, 158, 160, 0.3)"
@@ -17,7 +17,8 @@ class Location extends React.Component {
           <Image
             style={styles.icon}
             resizeMode="contain"
-            source={require('../assets/icons/gps.png')}></Image>
+            source={require('../assets/icons/gps.png')}
+          />
         </TouchableHighlight>
       </View>
     );
@@ -40,7 +41,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginLeft: 10,
     paddingHorizontal: 20,
     paddingVertical: 5,
     backgroundColor: 'transparent',

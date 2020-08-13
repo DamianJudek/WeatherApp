@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import TodayMain from './TodayMain';
 import TodayPerHour from './TodayPerHour';
 
@@ -24,7 +24,11 @@ class MainPanel extends React.Component {
               Wyszukaj miasto
             </Text>
             <Text
-              style={[{textAlign: 'center'}, styles.baseText, styles.thinText]}>
+              style={[
+                { textAlign: 'center' },
+                styles.baseText,
+                styles.thinText,
+              ]}>
               lub
             </Text>
             <Text style={[styles.baseText, styles.heading]}>

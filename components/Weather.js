@@ -1,20 +1,21 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import Location from './Location';
 import MainPanel from './MainPanel';
 import NextDays from './NextDays';
 export default class Weather extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
+
   state = {
     latitude: null,
     longitude: null,
     cityName: null,
     weatherFetched: false,
     phoneLocated: false,
-    weather: {dataPerHour: []},
+    weather: { dataPerHour: [] },
   };
   _apiAddress = 'http://api.openweathermap.org/data/2.5/forecast?';
   _apiKey = '15c1ecbcb9637c933c82bf1397cdf07b';
@@ -33,17 +34,17 @@ export default class Weather extends React.Component {
           // See error code charts below.
           console.log(error.code, error.message);
         },
-        {enableHighAccuracy: true, timeout: 15000},
+        { enableHighAccuracy: true, timeout: 15000 },
       );
     }
   };
-  _parseWeatherData = (data) => {
+  _parseWeatherData = (datas) => {
     const weather = {};
     weather.city = datas.city.name;
     weather.dataPerHour = [];
     for (const data of datas.list) {
       const perHour = {
-        temp: parseInt(data.main.temp),
+        temp: parseInt(data.main.temp, 10),
         humidity: data.main.humidity,
         description: data.weather[0].description,
         wind: data.wind.speed,
@@ -59,24 +60,32 @@ export default class Weather extends React.Component {
     });
   };
   _fetchDataFromApi = (url) => {
-    const prevThis = this;
+    const that = this;
 
     fetch(url)
       .then((response) => {
+        console.log('Response 1:');
+        console.log(response);
+        console.log('JSON 1:');
+        const a = response.json();
+        console.log(a);
         if (response.ok) {
-          return response.json();
+          return a;
         }
         throw new Error('Api returns code ' + response.status);
       })
       .then((data) => {
-        prevThis._parseWeatherData(data);
+        console.log('JSON 2:');
+        console.log(data);
+        that._parseWeatherData(data);
       })
       .catch((error) => {
+        console.log('Błąd:');
         console.log(error);
       });
   };
   handleCityInput = (e) => {
-    this.setState({cityName: e.nativeEvent.text});
+    this.setState({ cityName: e.nativeEvent.text });
   };
   getWeatherByCoords = () => {
     const lat = this.state.latitude;
@@ -116,13 +125,14 @@ export default class Weather extends React.Component {
       <View style={styles.container}>
         <Location
           getLocation={this._getLocation}
-          handleCityInput={this.handleCityInput}></Location>
+          handleCityInput={this.handleCityInput}
+        />
         <MainPanel
           weather={this.state.weather.dataPerHour.slice(0, 5)}
           weatherFetched={this.state.weatherFetched}
           city={this.state.weather.city}
         />
-        <NextDays></NextDays>
+        <NextDays />
       </View>
     );
   }

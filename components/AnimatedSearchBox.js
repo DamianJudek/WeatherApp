@@ -21,14 +21,14 @@ class AnimatedSearchBox extends React.Component {
         duration: 800,
         useNativeDriver: false,
       }).start();
-      this.setState({active: false});
+      this.setState({ active: false });
     } else if (this.state.active === false) {
       Animated.timing(this.state.animation, {
         toValue: 1,
         duration: 800,
         useNativeDriver: false,
       }).start();
-      this.setState({active: true});
+      this.setState({ active: true });
     }
   };
   render() {
@@ -41,7 +41,8 @@ class AnimatedSearchBox extends React.Component {
           <Image
             style={styles.icon}
             resizeMode="contain"
-            source={require('../assets/icons/search.png')}></Image>
+            source={require('../assets/icons/search.png')}
+          />
         </TouchableHighlight>
         <Animated.View
           style={{
@@ -53,7 +54,7 @@ class AnimatedSearchBox extends React.Component {
               this.props.handleCityInput(e);
               this._onPress();
             }}
-            // autoCorrect={false}
+            autoCorrect={false}
             placeholderTextColor="#fff"
             style={
               this.state.active
@@ -63,9 +64,10 @@ class AnimatedSearchBox extends React.Component {
                     fontSize: 16,
                     color: '#fff',
                   }
-                : {width: 0, padding: 0}
+                : { width: 0, padding: 0 }
             }
-            placeholder={this.state.active ? 'Miasto' : ''}></TextInput>
+            placeholder={this.state.active ? 'Miasto' : ''}
+          />
         </Animated.View>
       </>
     );
