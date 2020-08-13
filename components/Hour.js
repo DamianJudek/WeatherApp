@@ -1,5 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+
+const styles = StyleSheet.create({
+  icon: {
+    height: 60,
+    width: 60,
+  },
+  baseText: {
+    fontFamily: 'Roboto',
+    color: '#fff',
+    fontSize: 18,
+  },
+});
+
 const Hour = (props) => {
   const { weather } = props;
   return (
@@ -16,15 +29,5 @@ const Hour = (props) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  icon: {
-    height: 60,
-    width: 60,
-  },
-  baseText: {
-    fontFamily: 'Roboto',
-    color: '#fff',
-    fontSize: 18,
-  },
-});
+
 export default Hour;

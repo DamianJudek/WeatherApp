@@ -6,6 +6,26 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
+
+const styles = StyleSheet.create({
+  icon: {
+    height: 20,
+    width: 20,
+  },
+  iconContainer: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    backgroundColor: 'transparent',
+  },
+  searchBox: {
+    backgroundColor: 'rgba(95, 158, 160, 0.4)',
+    height: 50,
+  },
+});
+
 class AnimatedSearchBox extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +34,8 @@ class AnimatedSearchBox extends React.Component {
       active: false,
     };
   }
-  _onPress = () => {
+
+  onPress = () => {
     if (this.state.active === true) {
       Animated.timing(this.state.animation, {
         toValue: 0,
@@ -31,11 +52,12 @@ class AnimatedSearchBox extends React.Component {
       this.setState({ active: true });
     }
   };
+
   render() {
     return (
       <>
         <TouchableHighlight
-          onPress={this._onPress}
+          onPress={this.onPress}
           underlayColor="rgba(95, 158, 160, 0.3)"
           style={styles.iconContainer}>
           <Image
@@ -52,7 +74,7 @@ class AnimatedSearchBox extends React.Component {
           <TextInput
             onSubmitEditing={(e) => {
               this.props.handleCityInput(e);
-              this._onPress();
+              this.onPress();
             }}
             autoCorrect={false}
             placeholderTextColor="#fff"
@@ -73,22 +95,5 @@ class AnimatedSearchBox extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  icon: {
-    height: 20,
-    width: 20,
-  },
-  iconContainer: {
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 5,
-    backgroundColor: 'transparent',
-  },
-  searchBox: {
-    backgroundColor: 'rgba(95, 158, 160, 0.4)',
-    height: 50,
-  },
-});
+
 export default AnimatedSearchBox;

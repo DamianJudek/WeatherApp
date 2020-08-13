@@ -3,14 +3,35 @@ import { View, Text, StyleSheet } from 'react-native';
 import TodayMain from './TodayMain';
 import TodayPerHour from './TodayPerHour';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 5,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  baseText: {
+    fontFamily: 'Roboto',
+    color: '#fff',
+    fontSize: 22,
+  },
+  heading: {
+    textAlign: 'center',
+    fontSize: 35,
+  },
+  thinText: {
+    fontWeight: '100',
+  },
+});
+
 class MainPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
-    const weather = this.props.weather;
-    const weatherFetched = this.props.weatherFetched;
+    const { weather } = this.props;
+    const { weatherFetched } = this.props;
     return (
       <View style={styles.container}>
         {weatherFetched ? (
@@ -40,24 +61,5 @@ class MainPanel extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 5,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  baseText: {
-    fontFamily: 'Roboto',
-    color: '#fff',
-    fontSize: 22,
-  },
-  heading: {
-    textAlign: 'center',
-    fontSize: 35,
-  },
-  thinText: {
-    fontWeight: '100',
-  },
-});
 
 export default MainPanel;

@@ -2,20 +2,6 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Hour from './Hour';
 
-const TodayPerHour = (props) => {
-  const { weather } = props;
-  return (
-    <View style={styles.container}>
-      <Hour weather={weather[0]} style={styles.section} />
-      <Hour weather={weather[1]} style={styles.section} />
-      <Hour weather={weather[2]} style={styles.section} />
-      <Hour
-        weather={weather[3]}
-        style={[styles.section, { borderRightWidth: 0 }]}
-      />
-    </View>
-  );
-};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -35,4 +21,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+const TodayPerHour = (props) => {
+  const { weather } = props;
+  return (
+    <View style={styles.container}>
+      <Hour weather={weather[0]} style={styles.section} />
+      <Hour weather={weather[1]} style={styles.section} />
+      <Hour weather={weather[2]} style={styles.section} />
+      <Hour
+        weather={weather[3]}
+        style={[styles.section, { borderRightWidth: 0 }]}
+      />
+    </View>
+  );
+};
+
 export default TodayPerHour;

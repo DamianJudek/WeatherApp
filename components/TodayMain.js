@@ -1,6 +1,48 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 3,
+    backgroundColor: 'rgba(30, 30, 30, 0.4)',
+    // backgroundColor: 'rgba(0, 0, 0, 0.4)',
+
+    flexDirection: 'column',
+    borderRadius: 50,
+    marginVertical: 10,
+  },
+  section: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  subSection: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
+  baseText: {
+    fontFamily: 'Roboto',
+    color: '#fff',
+    fontSize: 35,
+  },
+  bigText: {
+    fontSize: 95,
+  },
+  icon: {
+    height: 20,
+    width: 20,
+    marginRight: 10,
+  },
+  bigIcon: {
+    height: 120,
+    width: 120,
+  },
+});
+
 const TodayMain = (props) => {
   const { humidity, temp, wind, description, icon } = props.weather;
   return (
@@ -51,45 +93,5 @@ const TodayMain = (props) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 3,
-    backgroundColor: 'rgba(30, 30, 30, 0.4)',
-    // backgroundColor: 'rgba(0, 0, 0, 0.4)',
 
-    flexDirection: 'column',
-    borderRadius: 50,
-    marginVertical: 10,
-  },
-  section: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  subSection: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-  },
-  baseText: {
-    fontFamily: 'Roboto',
-    color: '#fff',
-    fontSize: 35,
-  },
-  bigText: {
-    fontSize: 95,
-  },
-  icon: {
-    height: 20,
-    width: 20,
-    marginRight: 10,
-  },
-  bigIcon: {
-    height: 120,
-    width: 120,
-  },
-});
 export default TodayMain;

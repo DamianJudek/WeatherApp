@@ -4,22 +4,42 @@ import Geolocation from 'react-native-geolocation-service';
 import Location from './Location';
 import MainPanel from './MainPanel';
 import NextDays from './NextDays';
-export default class Weather extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
-  state = {
-    latitude: null,
-    longitude: null,
-    cityName: null,
-    weatherFetched: false,
-    phoneLocated: false,
-    weather: { dataPerHour: [] },
-  };
-  _apiAddress = 'http://api.openweathermap.org/data/2.5/forecast?';
-  _apiKey = '15c1ecbcb9637c933c82bf1397cdf07b';
-  _getLocation = () => {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    padding: 5,
+    justifyContent: 'center',
+  },
+  baseText: {
+    fontFamily: 'Roboto',
+    color: '#fff',
+    fontSize: 22,
+  },
+  heading: {
+    fontSize: 35,
+  },
+});
+
+export default class Weather extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      latitude: null,
+      longitude: null,
+      cityName: null,
+      weatherFetched: false,
+      phoneLocated: false,
+      weather: { dataPerHour: [] },
+    };
+  }
+
+  apiAddress = 'http://api.openweathermap.org/data/2.5/forecast?';
+
+  apiKey = '15c1ecbcb9637c933c82bf1397cdf07b';
+
+  getLocation = () => {
     if (this.props.hasLocationPermission) {
       Geolocation.getCurrentPosition(
         (position) => {
@@ -38,76 +58,72 @@ export default class Weather extends React.Component {
       );
     }
   };
-  _parseWeatherData = (datas) => {
+
+  parseWeatherData = (datas) => {
     const weather = {};
     weather.city = datas.city.name;
     weather.dataPerHour = [];
-    for (const data of datas.list) {
+
+    for (const data of datas) {
       const perHour = {
         temp: parseInt(data.main.temp, 10),
         humidity: data.main.humidity,
         description: data.weather[0].description,
         wind: data.wind.speed,
-        hour: data.dt_txt.substr(-8, 5),
+        hour: data.dttxt.substr(-8, 5),
         date: data.dt,
         icon: data.weather[0].icon,
       };
       weather.dataPerHour.push(perHour);
     }
     this.setState({
-      weather: weather,
+      weather,
       weatherFetched: true,
     });
   };
-  _fetchDataFromApi = (url) => {
-    const that = this;
 
+  fetchDataFromApi = (url) => {
+    const that = this;
     fetch(url)
       .then((response) => {
-        console.log('Response 1:');
-        console.log(response);
-        console.log('JSON 1:');
-        const a = response.json();
-        console.log(a);
         if (response.ok) {
-          return a;
+          return response.json();
         }
-        throw new Error('Api returns code ' + response.status);
+        throw new Error(`Api returns code ${response.status}`);
       })
       .then((data) => {
-        console.log('JSON 2:');
-        console.log(data);
-        that._parseWeatherData(data);
+        that.parseWeatherData(data);
       })
       .catch((error) => {
-        console.log('Błąd:');
         console.log(error);
       });
   };
+
   handleCityInput = (e) => {
     this.setState({ cityName: e.nativeEvent.text });
   };
+
   getWeatherByCoords = () => {
     const lat = this.state.latitude;
     const lon = this.state.longitude;
-    const phoneLocated = this.state.phoneLocated;
+    const { phoneLocated } = this.state;
     if (phoneLocated) {
-      let query = `${this._apiAddress}lat=${lat}&lon=${lon}&lang=PL&units=metric&appid=${this._apiKey}`;
-      this._fetchDataFromApi(query);
+      const query = `${this.apiAddress}lat=${lat}&lon=${lon}&lang=PL&units=metric&appid=${this.apiKey}`;
+      this.fetchDataFromApi(query);
     }
   };
+
   getWeatherByCity = () => {
     if (this.state.cityName !== null) {
-      console.log('CityName:');
-      console.log(this.state.cityName);
-      let query = `${this._apiAddress}q=${this.state.cityName}&lang=PL&units=metric&appid=${this._apiKey}`;
-      this._fetchDataFromApi(query);
+      const query = `${this.apiAddress}q=${this.state.cityName}&lang=PL&units=metric&appid=${this.apiKey}`;
+      this.fetchDataFromApi(query);
     }
   };
 
   componentDidMount() {
-    this._getLocation();
+    this.getLocation();
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.latitude !== this.state.latitude ||
@@ -120,11 +136,12 @@ export default class Weather extends React.Component {
       this.getWeatherByCity();
     }
   }
+
   render() {
     return (
       <View style={styles.container}>
         <Location
-          getLocation={this._getLocation}
+          getLocation={this.getLocation}
           handleCityInput={this.handleCityInput}
         />
         <MainPanel
@@ -137,20 +154,3 @@ export default class Weather extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    padding: 5,
-    justifyContent: 'center',
-  },
-  baseText: {
-    fontFamily: 'Roboto',
-    color: '#fff',
-    fontSize: 22,
-  },
-  heading: {
-    fontSize: 35,
-  },
-});
