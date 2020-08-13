@@ -59,23 +59,22 @@ export default class Weather extends React.Component {
     }
   };
 
-  parseWeatherData = (datas) => {
+  parseWeatherData = (data) => {
     const weather = {};
-    weather.city = datas.city.name;
+    weather.city = data.city.name;
     weather.dataPerHour = [];
-
-    for (const data of datas) {
+    data.forEach((weatherLog) => {
       const perHour = {
-        temp: parseInt(data.main.temp, 10),
-        humidity: data.main.humidity,
-        description: data.weather[0].description,
-        wind: data.wind.speed,
-        hour: data.dttxt.substr(-8, 5),
-        date: data.dt,
-        icon: data.weather[0].icon,
+        temp: parseInt(weatherLog.main.temp, 10),
+        humidity: weatherLog.main.humidity,
+        description: weatherLog.weather[0].description,
+        wind: weatherLog.wind.speed,
+        hour: weatherLog.dttxt.substr(-8, 5),
+        date: weatherLog.dt,
+        icon: weatherLog.weather[0].icon,
       };
       weather.dataPerHour.push(perHour);
-    }
+    });
     this.setState({
       weather,
       weatherFetched: true,

@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import humidityIcon from '../assets/icons/humidity.png';
+import windIcon from '../assets/icons/wind.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -76,17 +78,13 @@ const TodayMain = (props) => {
           <Image
             style={styles.icon}
             resizeMode="contain"
-            source={require('../assets/icons/humidity.png')}
+            source={humidityIcon}
           />
           <Text
             style={[styles.baseText, styles.heading]}>{`${humidity}%`}</Text>
         </View>
         <View style={styles.subSection}>
-          <Image
-            style={styles.icon}
-            resizeMode="contain"
-            source={require('../assets/icons/wind.png')}
-          />
+          <Image style={styles.icon} resizeMode="contain" source={windIcon} />
           <Text style={[styles.baseText, styles.heading]}>{`${wind}m/s`}</Text>
         </View>
       </View>

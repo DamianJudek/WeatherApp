@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import ASBox from './AnimatedSearchBox';
+import locationIcon from '../assets/icons/gps.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,7 +45,7 @@ class Location extends React.Component {
           <Image
             style={styles.icon}
             resizeMode="contain"
-            source={require('../assets/icons/gps.png')}
+            source={locationIcon}
           />
         </TouchableHighlight>
       </View>

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
+import searchIcon from '../assets/icons/search.png';
 
 const styles = StyleSheet.create({
   icon: {
@@ -60,11 +61,7 @@ class AnimatedSearchBox extends React.Component {
           onPress={this.onPress}
           underlayColor="rgba(95, 158, 160, 0.3)"
           style={styles.iconContainer}>
-          <Image
-            style={styles.icon}
-            resizeMode="contain"
-            source={require('../assets/icons/search.png')}
-          />
+          <Image style={styles.icon} resizeMode="contain" source={searchIcon} />
         </TouchableHighlight>
         <Animated.View
           style={{
