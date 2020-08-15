@@ -1,15 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import Day from './Day';
 
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
     borderRadius: 50,
 
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  },
+  section: {
+    flex: 1,
+    borderRightWidth: 1,
+    borderColor: '#fff',
+    justifyContent: 'center',
+    padding: 10,
   },
 });
 
@@ -20,9 +27,16 @@ class NextDays extends React.Component {
   }
 
   render() {
+    const [first, second, third, fourth] = this.props.days;
     return (
       <View style={styles.container}>
-        <Text>To jest panel nastepnych dni</Text>
+        <Day style={styles.section} weather={first} />
+        <Day style={styles.section} weather={second} />
+        <Day style={styles.section} weather={third} />
+        <Day
+          style={[styles.section, { borderRightWidth: 0 }]}
+          weather={fourth}
+        />
       </View>
     );
   }

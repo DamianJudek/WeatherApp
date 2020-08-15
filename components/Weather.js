@@ -4,6 +4,7 @@ import Geolocation from 'react-native-geolocation-service';
 import Location from './Location';
 import MainPanel from './MainPanel';
 import NextDays from './NextDays';
+import Welcome from './WelcomeScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -59,22 +60,46 @@ export default class Weather extends React.Component {
     }
   };
 
-  parseWeatherData = (data) => {
-    const weather = {};
-    weather.city = data.city.name;
-    weather.dataPerHour = [];
+  extractWeatherData = (data) => {
+    const weatherPerHours = [];
     data.forEach((weatherLog) => {
-      const perHour = {
+      const hour = {
         temp: parseInt(weatherLog.main.temp, 10),
         humidity: weatherLog.main.humidity,
         description: weatherLog.weather[0].description,
         wind: weatherLog.wind.speed,
-        hour: weatherLog.dttxt.substr(-8, 5),
-        date: weatherLog.dt,
+        hour: weatherLog.dt_txt.substr(-8, 5),
         icon: weatherLog.weather[0].icon,
+        dayNumber: new Date(weatherLog.dt * 1000).getDay(),
       };
-      weather.dataPerHour.push(perHour);
+      weatherPerHours.push(hour);
     });
+    return weatherPerHours;
+  };
+
+  parseWeatherData = (data) => {
+    const weather = {};
+    const days = ['NIEDZ.', 'PON.', 'WT.', 'ŚR.', 'CZW.', 'PT.', 'SOB.'];
+    weather.city = data.city.name;
+    weather.days = [];
+    const extractedData = this.extractWeatherData(data.list);
+    [weather.currenWeather] = extractedData;
+    weather.nearestHours = extractedData.slice(1, 5);
+    let daysCounter = 0;
+    for (let i = 0; i < extractedData.length; i += 1) {
+      if (extractedData[i].hour === '00:00') {
+        const day = {};
+        day.maxTemp = extractedData[i + 5].temp;
+        day.minTemp = extractedData[i + 9].temp;
+        day.icon = extractedData[i + 5].icon;
+        daysCounter += 1;
+        day.name = days[extractedData[i + 5].dayNumber];
+        weather.days.push(day);
+      }
+      if (daysCounter === 4) {
+        break;
+      }
+    }
     this.setState({
       weather,
       weatherFetched: true,
@@ -137,18 +162,32 @@ export default class Weather extends React.Component {
   }
 
   render() {
+    const { weather, weatherFetched } = this.state;
     return (
       <View style={styles.container}>
-        <Location
-          getLocation={this.getLocation}
-          handleCityInput={this.handleCityInput}
-        />
-        <MainPanel
-          weather={this.state.weather.dataPerHour.slice(0, 5)}
-          weatherFetched={this.state.weatherFetched}
-          city={this.state.weather.city}
-        />
-        <NextDays />
+        {weatherFetched ? (
+          <>
+            <Location
+              getLocation={this.getLocation}
+              handleCityInput={this.handleCityInput}
+            />
+            <MainPanel
+              currentWeather={weather.currenWeather}
+              weatherFetched={this.state.weatherFetched}
+              city={this.state.weather.city}
+              nearestHours={weather.nearestHours}
+            />
+            <NextDays days={weather.days} />
+          </>
+        ) : (
+          <>
+            <Location
+              getLocation={this.getLocation}
+              handleCityInput={this.handleCityInput}
+            />
+            <Welcome />
+          </>
+        )}
       </View>
     );
   }

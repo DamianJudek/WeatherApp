@@ -30,33 +30,13 @@ class MainPanel extends React.Component {
   }
 
   render() {
-    const { weather } = this.props;
-    const { weatherFetched } = this.props;
+    const { currentWeather, nearestHours, city } = this.props;
     return (
       <View style={styles.container}>
-        {weatherFetched ? (
-          <View style={styles.container}>
-            <TodayMain city={this.props.city} weather={weather[0]} />
-            <TodayPerHour weather={weather} />
-          </View>
-        ) : (
-          <>
-            <Text style={[styles.baseText, styles.heading]}>
-              Wyszukaj miasto
-            </Text>
-            <Text
-              style={[
-                { textAlign: 'center' },
-                styles.baseText,
-                styles.thinText,
-              ]}>
-              lub
-            </Text>
-            <Text style={[styles.baseText, styles.heading]}>
-              użyj lokalizacji
-            </Text>
-          </>
-        )}
+        <View style={styles.container}>
+          <TodayMain city={city} weather={currentWeather} />
+          <TodayPerHour weather={nearestHours} />
+        </View>
       </View>
     );
   }

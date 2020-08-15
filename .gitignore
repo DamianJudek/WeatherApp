@@ -59,7 +59,7 @@ buck-out/
 /ios/Pods/
 
 # Images
-./assets/weather-icons
 ./assets/background-images
 
+#ide settings
 .vscode/
