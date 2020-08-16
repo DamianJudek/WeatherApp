@@ -43,7 +43,7 @@ const Day = (props) => {
           style={styles.icon}
           resizeMode="contain"
           source={{
-            uri: `http://openweathermap.org/img/wn/${weather.icon}@2x.png`,
+            uri: `http://openweathermap.org/img/wn/${weather.iconDay}@2x.png`,
           }}
         />
         <Text
@@ -68,7 +68,7 @@ const Day = (props) => {
           style={[styles.icon, styles.floatRight]}
           resizeMode="contain"
           source={{
-            uri: `http://openweathermap.org/img/wn/${weather.icon}@2x.png`,
+            uri: `http://openweathermap.org/img/wn/${weather.iconNight}@2x.png`,
           }}
         />
       </View>

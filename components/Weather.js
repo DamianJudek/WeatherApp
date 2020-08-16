@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import AsyncStorage from '@react-native-community/async-storage';
 import Location from './Location';
 import MainPanel from './MainPanel';
 import NextDays from './NextDays';
@@ -32,11 +33,18 @@ export default class Weather extends React.Component {
       cityName: null,
       weatherFetched: false,
       phoneLocated: false,
-      weather: { dataPerHour: [] },
+      weather: {
+        days: [],
+        city: null,
+        currenWeather: null,
+        nearestHours: null,
+      },
     };
   }
 
   apiAddress = 'http://api.openweathermap.org/data/2.5/forecast?';
+
+  storageKey = '@WeatherApp:';
 
   apiKey = '15c1ecbcb9637c933c82bf1397cdf07b';
 
@@ -45,14 +53,10 @@ export default class Weather extends React.Component {
       Geolocation.getCurrentPosition(
         (position) => {
           console.log(position);
-          this.setState({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            phoneLocated: true,
-          });
+          const { latitude, longitude } = position.coords;
+          this.getWeatherByCoords(latitude, longitude);
         },
         (error) => {
-          // See error code charts below.
           console.log(error.code, error.message);
         },
         { enableHighAccuracy: true, timeout: 15000 },
@@ -77,6 +81,28 @@ export default class Weather extends React.Component {
     return weatherPerHours;
   };
 
+  savePersistentData = async (key = '', data = '') => {
+    const { storageKey } = this;
+    try {
+      await AsyncStorage.setItem(`${storageKey}:${key}`, data);
+    } catch (e) {
+      console.error(`AsyncStorage error: ${e.message}`);
+    }
+  };
+
+  getPersistentData = async (key) => {
+    const { storageKey } = this;
+    try {
+      const value = await AsyncStorage.getItem(`${storageKey}:${key}`);
+      if (value !== null) {
+        return value;
+      }
+    } catch (e) {
+      console.error(`AsyncStorage error: ${e.message}`);
+    }
+    return null;
+  };
+
   parseWeatherData = (data) => {
     const weather = {};
     const days = ['NIEDZ.', 'PON.', 'WT.', 'ŚR.', 'CZW.', 'PT.', 'SOB.'];
@@ -91,7 +117,8 @@ export default class Weather extends React.Component {
         const day = {};
         day.maxTemp = extractedData[i + 5].temp;
         day.minTemp = extractedData[i + 9].temp;
-        day.icon = extractedData[i + 5].icon;
+        day.iconDay = extractedData[i + 5].icon;
+        day.iconNight = extractedData[i + 9].icon;
         daysCounter += 1;
         day.name = days[extractedData[i + 5].dayNumber];
         weather.days.push(day);
@@ -100,6 +127,7 @@ export default class Weather extends React.Component {
         break;
       }
     }
+    this.savePersistentData('city', weather.city);
     this.setState({
       weather,
       weatherFetched: true,
@@ -107,7 +135,7 @@ export default class Weather extends React.Component {
   };
 
   fetchDataFromApi = (url) => {
-    const that = this;
+    const { parseWeatherData } = this;
     fetch(url)
       .then((response) => {
         if (response.ok) {
@@ -116,49 +144,34 @@ export default class Weather extends React.Component {
         throw new Error(`Api returns code ${response.status}`);
       })
       .then((data) => {
-        that.parseWeatherData(data);
+        parseWeatherData(data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
   handleCityInput = (e) => {
-    this.setState({ cityName: e.nativeEvent.text });
+    this.getWeatherByCity(e.nativeEvent.text);
   };
 
-  getWeatherByCoords = () => {
-    const lat = this.state.latitude;
-    const lon = this.state.longitude;
-    const { phoneLocated } = this.state;
-    if (phoneLocated) {
-      const query = `${this.apiAddress}lat=${lat}&lon=${lon}&lang=PL&units=metric&appid=${this.apiKey}`;
-      this.fetchDataFromApi(query);
-    }
+  getWeatherByCoords = (lat, lon) => {
+    const query = `${this.apiAddress}lat=${lat}&lon=${lon}&lang=PL&units=metric&appid=${this.apiKey}`;
+    this.fetchDataFromApi(query);
   };
 
-  getWeatherByCity = () => {
-    if (this.state.cityName !== null) {
-      const query = `${this.apiAddress}q=${this.state.cityName}&lang=PL&units=metric&appid=${this.apiKey}`;
-      this.fetchDataFromApi(query);
-    }
+  getWeatherByCity = (city) => {
+    const query = `${this.apiAddress}q=${city}&lang=PL&units=metric&appid=${this.apiKey}`;
+    console.log(query);
+    this.fetchDataFromApi(query);
   };
 
   componentDidMount() {
-    this.getLocation();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.latitude !== this.state.latitude ||
-      prevState.longitude !== this.state.longitude
-    ) {
-      this.getWeatherByCoords();
-      console.log('update');
-    } else if (prevState.cityName !== this.state.cityName) {
-      console.log('Szukam po mieście ');
-      this.getWeatherByCity();
-    }
+    this.getPersistentData('city').then((city) => {
+      if (city !== null) {
+        this.getWeatherByCity(city);
+      }
+    });
   }
 
   render() {

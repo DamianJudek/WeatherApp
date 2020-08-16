@@ -13,6 +13,7 @@ import {
   PermissionsAndroid,
   ImageBackground,
 } from 'react-native';
+import bgImage from './assets/background-images/sky.jpg';
 import Weather from './components/Weather';
 
 const styles = StyleSheet.create({
@@ -73,7 +74,7 @@ class App extends React.Component {
       <View style={styles.container}>
         <ImageBackground
           style={styles.background}
-          source={require('./assets/background-images/sky.jpg')}
+          source={bgImage}
           resizeMode="cover">
           <Weather
             hasLocationPermission={this.state.hasLocationPermission}></Weather>
