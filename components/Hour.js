@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   icon: {
@@ -14,9 +15,9 @@ const styles = StyleSheet.create({
 });
 
 const Hour = (props) => {
-  const { weather } = props;
+  const { weather, style } = props;
   return (
-    <View style={props.style}>
+    <View style={style}>
       <Text style={styles.baseText}>{weather.hour}</Text>
       <Image
         style={styles.icon}
@@ -29,5 +30,8 @@ const Hour = (props) => {
     </View>
   );
 };
-
+Hour.propTypes = {
+  weather: PropTypes.object,
+  style: PropTypes.object,
+};
 export default Hour;

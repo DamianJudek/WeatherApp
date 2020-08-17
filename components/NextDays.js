@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import Day from './Day';
 
 const styles = StyleSheet.create({
@@ -25,6 +26,10 @@ class NextDays extends React.Component {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    days: PropTypes.array,
+  };
 
   render() {
     const [first, second, third, fourth] = this.props.days;

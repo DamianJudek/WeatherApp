@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import searchIcon from '../assets/icons/search.png';
 
 const styles = StyleSheet.create({
@@ -35,6 +36,10 @@ class AnimatedSearchBox extends React.Component {
       active: false,
     };
   }
+
+  static propTypes = {
+    handleCityInput: PropTypes.func,
+  };
 
   onPress = () => {
     if (this.state.active === true) {

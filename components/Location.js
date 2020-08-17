@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import PropTypes from 'prop-types';
 import ASBox from './AnimatedSearchBox';
 import locationIcon from '../assets/icons/gps.png';
 
@@ -34,6 +35,11 @@ const styles = StyleSheet.create({
 });
 
 class Location extends React.Component {
+  static propTypes = {
+    handleCityInput: PropTypes.func,
+    getLocation: PropTypes.func,
+  };
+
   render() {
     return (
       <View style={styles.container}>

@@ -21,9 +21,9 @@ module.exports = {
   ],
   rules: {
     'arrow-body-style': 'warn',
-    'react-native/no-inline-styles': 0,
+    // 'react-native/no-inline-styles': 0,
     'object-curly-newline': 0,
-    'react/prop-types': 0,
+    // 'react/prop-types': 0,
     'prettier/prettier': 'error',
   },
 };

@@ -41,26 +41,19 @@ class App extends React.Component {
   }
 
   requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Hey! We need your permission to use your location',
-          message: 'Cool weather App needs access to your location ',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('You can use the location');
-        this.setState({ hasLocationPermission: true });
-      } else {
-        console.log('Location permission denied');
-        this.setState({ hasLocationPermission: false });
-      }
-    } catch (err) {
-      console.warn(err);
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Hey! We need your permission to use your location',
+        message: 'Cool weather App needs access to your location ',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      this.setState({ hasLocationPermission: true });
+    } else {
       this.setState({ hasLocationPermission: false });
     }
   };

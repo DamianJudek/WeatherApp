@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import AsyncStorage from '@react-native-community/async-storage';
+import NetInfo from '@react-native-community/netinfo';
+import PropTypes from 'prop-types';
 import Location from './Location';
 import MainPanel from './MainPanel';
 import NextDays from './NextDays';
@@ -41,6 +43,10 @@ export default class Weather extends React.Component {
       },
     };
   }
+
+  static propTypes = {
+    hasLocationPermission: PropTypes.bool,
+  };
 
   apiAddress = 'http://api.openweathermap.org/data/2.5/forecast?';
 
@@ -136,19 +142,24 @@ export default class Weather extends React.Component {
 
   fetchDataFromApi = (url) => {
     const { parseWeatherData } = this;
-    fetch(url)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(`Api returns code ${response.status}`);
-      })
-      .then((data) => {
-        parseWeatherData(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    NetInfo.fetch().then((status) => {
+      if (status.isConnected === true) {
+        fetch(url)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+          })
+          .then((data) => {
+            parseWeatherData(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        Alert.alert('Uwaga!', 'Brak połączenia internetowego');
+      }
+    });
   };
 
   handleCityInput = (e) => {
@@ -162,7 +173,6 @@ export default class Weather extends React.Component {
 
   getWeatherByCity = (city) => {
     const query = `${this.apiAddress}q=${city}&lang=PL&units=metric&appid=${this.apiKey}`;
-    console.log(query);
     this.fetchDataFromApi(query);
   };
 

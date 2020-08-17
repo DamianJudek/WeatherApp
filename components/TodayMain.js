@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import humidityIcon from '../assets/icons/humidity.png';
 import windIcon from '../assets/icons/wind.png';
 
@@ -46,11 +47,11 @@ const styles = StyleSheet.create({
 });
 
 const TodayMain = (props) => {
-  const { humidity, temp, wind, description, icon } = props.weather;
+  const { humidity, temp, wind, description, icon, city } = props.weather;
   return (
     <View style={styles.container}>
       <View style={styles.section}>
-        <Text style={[styles.baseText, styles.heading]}>{props.city}</Text>
+        <Text style={[styles.baseText, styles.heading]}>{city}</Text>
       </View>
 
       <View style={[styles.section, { flex: 2 }]}>
@@ -92,4 +93,7 @@ const TodayMain = (props) => {
   );
 };
 
+TodayMain.propTypes = {
+  weather: PropTypes.object,
+};
 export default TodayMain;

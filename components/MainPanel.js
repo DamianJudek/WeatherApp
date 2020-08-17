@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import TodayMain from './TodayMain';
 import TodayPerHour from './TodayPerHour';
 
@@ -28,6 +29,12 @@ class MainPanel extends React.Component {
     super(props);
     this.state = {};
   }
+
+  static propTypes = {
+    currentWeather: PropTypes.object,
+    nearestHours: PropTypes.array,
+    city: PropTypes.string,
+  };
 
   render() {
     const { currentWeather, nearestHours, city } = this.props;
