@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
 
 const Day = (props) => {
   const { weather, style } = props;
-
   return (
     <View style={style}>
       <Text style={styles.baseText}>{weather.name}</Text>
@@ -78,7 +77,7 @@ const Day = (props) => {
 };
 Day.propTypes = {
   weather: PropTypes.object,
-  style: PropTypes.object,
+  style: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
 
 export default Day;

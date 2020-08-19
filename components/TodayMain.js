@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
 });
 
 const TodayMain = (props) => {
-  const { humidity, temp, wind, description, icon, city } = props.weather;
+  const { humidity, temp, wind, description, icon } = props.weather;
+  const { city } = props;
   return (
     <View style={styles.container}>
       <View style={styles.section}>
@@ -95,5 +96,6 @@ const TodayMain = (props) => {
 
 TodayMain.propTypes = {
   weather: PropTypes.object,
+  city: PropTypes.string,
 };
 export default TodayMain;

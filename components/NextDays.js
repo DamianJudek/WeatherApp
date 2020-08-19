@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     borderRadius: 50,
-
+    padding: 10,
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
   section: {

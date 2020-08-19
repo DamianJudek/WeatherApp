@@ -4,6 +4,7 @@ import Geolocation from 'react-native-geolocation-service';
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
 import PropTypes from 'prop-types';
+import config from '../app.config';
 import Location from './Location';
 import MainPanel from './MainPanel';
 import NextDays from './NextDays';
@@ -48,17 +49,18 @@ export default class Weather extends React.Component {
     hasLocationPermission: PropTypes.bool,
   };
 
-  apiAddress = 'http://api.openweathermap.org/data/2.5/forecast?';
-
-  storageKey = '@WeatherApp:';
-
-  apiKey = '15c1ecbcb9637c933c82bf1397cdf07b';
+  componentDidMount() {
+    this.getPersistentData('city').then((city) => {
+      if (city !== null) {
+        this.getWeatherByCity(city);
+      }
+    });
+  }
 
   getLocation = () => {
     if (this.props.hasLocationPermission) {
       Geolocation.getCurrentPosition(
         (position) => {
-          console.log(position);
           const { latitude, longitude } = position.coords;
           this.getWeatherByCoords(latitude, longitude);
         },
@@ -149,6 +151,7 @@ export default class Weather extends React.Component {
             if (response.ok) {
               return response.json();
             }
+            throw new Error(`Api returns code ${response.status}`);
           })
           .then((data) => {
             parseWeatherData(data);
@@ -167,22 +170,23 @@ export default class Weather extends React.Component {
   };
 
   getWeatherByCoords = (lat, lon) => {
-    const query = `${this.apiAddress}lat=${lat}&lon=${lon}&lang=PL&units=metric&appid=${this.apiKey}`;
-    this.fetchDataFromApi(query);
+    const url = new URL(config.apiAddress);
+    url.searchParams.append('lat', lat);
+    url.searchParams.append('lon', lon);
+    url.searchParams.append('lang', 'PL');
+    url.searchParams.append('units', 'metric');
+    url.searchParams.append('appid', config.apiKey);
+    this.fetchDataFromApi(url);
   };
 
   getWeatherByCity = (city) => {
-    const query = `${this.apiAddress}q=${city}&lang=PL&units=metric&appid=${this.apiKey}`;
-    this.fetchDataFromApi(query);
+    const url = new URL(config.apiAddress);
+    url.searchParams.append('q', city);
+    url.searchParams.append('lang', 'PL');
+    url.searchParams.append('units', 'metric');
+    url.searchParams.append('appid', config.apiKey);
+    this.fetchDataFromApi(url);
   };
-
-  componentDidMount() {
-    this.getPersistentData('city').then((city) => {
-      if (city !== null) {
-        this.getWeatherByCity(city);
-      }
-    });
-  }
 
   render() {
     const { weather, weatherFetched } = this.state;

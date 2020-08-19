@@ -32,6 +32,6 @@ const Hour = (props) => {
 };
 Hour.propTypes = {
   weather: PropTypes.object,
-  style: PropTypes.object,
+  style: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
 export default Hour;
