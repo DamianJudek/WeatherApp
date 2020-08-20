@@ -90,7 +90,7 @@ export default class Weather extends React.Component {
   };
 
   savePersistentData = async (key = '', data = '') => {
-    const { storageKey } = this;
+    const { storageKey } = config;
     try {
       await AsyncStorage.setItem(`${storageKey}:${key}`, data);
     } catch (e) {
@@ -99,7 +99,7 @@ export default class Weather extends React.Component {
   };
 
   getPersistentData = async (key) => {
-    const { storageKey } = this;
+    const { storageKey } = config;
     try {
       const value = await AsyncStorage.getItem(`${storageKey}:${key}`);
       if (value !== null) {

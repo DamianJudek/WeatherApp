@@ -17,7 +17,10 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     borderColor: '#fff',
     justifyContent: 'center',
-    padding: 10,
+    paddingHorizontal: '2%',
+  },
+  lastSection: {
+    borderRightWidth: 0,
   },
 });
 
@@ -38,10 +41,7 @@ class NextDays extends React.Component {
         <Day style={styles.section} weather={first} />
         <Day style={styles.section} weather={second} />
         <Day style={styles.section} weather={third} />
-        <Day
-          style={[styles.section, { borderRightWidth: 0 }]}
-          weather={fourth}
-        />
+        <Day style={[styles.section, styles.lastSection]} weather={fourth} />
       </View>
     );
   }

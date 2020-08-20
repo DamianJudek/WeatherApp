@@ -26,6 +26,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(95, 158, 160, 0.4)',
     height: 50,
   },
+  inputActive: {
+    width: '100%',
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#fff',
+  },
+  inputInactive: { width: 0, padding: 0 },
 });
 
 class AnimatedSearchBox extends React.Component {
@@ -81,14 +88,7 @@ class AnimatedSearchBox extends React.Component {
             autoCorrect={false}
             placeholderTextColor="#fff"
             style={
-              this.state.active
-                ? {
-                    width: '100%',
-                    textAlign: 'center',
-                    fontSize: 16,
-                    color: '#fff',
-                  }
-                : { width: 0, padding: 0 }
+              this.state.active ? styles.inputActive : styles.inputInactive
             }
             placeholder={this.state.active ? 'Miasto' : ''}
           />

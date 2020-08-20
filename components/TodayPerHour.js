@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  lastSection: {
+    borderRightWidth: 0,
+  },
 });
 
 const TodayPerHour = (props) => {
@@ -31,10 +34,7 @@ const TodayPerHour = (props) => {
       <Hour weather={weather[0]} style={styles.section} />
       <Hour weather={weather[1]} style={styles.section} />
       <Hour weather={weather[2]} style={styles.section} />
-      <Hour
-        weather={weather[3]}
-        style={[styles.section, { borderRightWidth: 0 }]}
-      />
+      <Hour weather={weather[3]} style={[styles.section, styles.lastSection]} />
     </View>
   );
 };

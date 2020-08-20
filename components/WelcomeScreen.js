@@ -10,12 +10,17 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 35,
   },
+  infoBox: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 const Welcome = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <View style={styles.infoBox}>
     <Text style={[styles.baseText, styles.heading]}>Wyszukaj miasto</Text>
-    <Text style={[{ textAlign: 'center' }, styles.baseText]}>lub</Text>
+    <Text style={styles.baseText}>lub</Text>
     <Text style={[styles.baseText, styles.heading]}>użyj lokalizacji</Text>
   </View>
 );
