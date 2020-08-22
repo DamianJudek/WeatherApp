@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { Text, StyleSheet, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import FadeInView from './FadeInView';
 
 const styles = StyleSheet.create({
   icon: {
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
 const Hour = (props) => {
   const { weather, style } = props;
   return (
-    <View style={style}>
+    <FadeInView style={style}>
       <Text style={styles.baseText}>{weather.hour}</Text>
       <Image
         style={styles.icon}
@@ -27,7 +28,7 @@ const Hour = (props) => {
         }}
       />
       <Text style={styles.baseText}>{`${weather.temp}\u2103`}</Text>
-    </View>
+    </FadeInView>
   );
 };
 Hour.propTypes = {

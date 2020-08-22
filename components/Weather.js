@@ -151,13 +151,16 @@ export default class Weather extends React.Component {
             if (response.ok) {
               return response.json();
             }
-            throw new Error(`Api returns code ${response.status}`);
+            throw new Error();
           })
           .then((data) => {
             parseWeatherData(data);
           })
-          .catch((error) => {
-            console.error(error);
+          .catch(() => {
+            Alert.alert(
+              'Uwaga!',
+              'Nie odnaleziono pogody dla żadanej lokalizacji',
+            );
           });
       } else {
         Alert.alert('Uwaga!', 'Brak połączenia internetowego');
