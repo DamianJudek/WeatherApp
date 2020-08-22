@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Day from './Day';
+import FadeInView from './FadeInView';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,12 +38,12 @@ class NextDays extends React.Component {
   render() {
     const [first, second, third, fourth] = this.props.days;
     return (
-      <View style={styles.container}>
+      <FadeInView delay={600} style={styles.container}>
         <Day style={styles.section} weather={first} />
         <Day style={styles.section} weather={second} />
         <Day style={styles.section} weather={third} />
         <Day style={[styles.section, styles.lastSection]} weather={fourth} />
-      </View>
+      </FadeInView>
     );
   }
 }

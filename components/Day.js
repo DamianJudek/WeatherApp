@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import PropTypes from 'prop-types';
+import SlideInView from './SlideInView';
 
 const styles = StyleSheet.create({
   icon: {
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
 const Day = (props) => {
   const { weather, style } = props;
   return (
-    <View style={style}>
+    <SlideInView delay={900} style={style}>
       <Text style={styles.baseText}>{weather.name}</Text>
 
       <View style={styles.block}>
@@ -79,7 +80,7 @@ const Day = (props) => {
           />
         </View>
       </View>
-    </View>
+    </SlideInView>
   );
 };
 Day.propTypes = {

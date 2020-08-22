@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Hour from './Hour';
+import FadeInView from './FadeInView';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,12 +31,12 @@ const TodayPerHour = (props) => {
   const { weather } = props;
 
   return (
-    <View style={styles.container}>
+    <FadeInView delay={300} style={styles.container}>
       <Hour weather={weather[0]} style={styles.section} />
       <Hour weather={weather[1]} style={styles.section} />
       <Hour weather={weather[2]} style={styles.section} />
       <Hour weather={weather[3]} style={[styles.section, styles.lastSection]} />
-    </View>
+    </FadeInView>
   );
 };
 
