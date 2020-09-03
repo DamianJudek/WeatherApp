@@ -41,7 +41,7 @@ class SlideInView extends React.Component {
               {
                 translateY: this.state.opacity.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [-35, 0],
+                  outputRange: [35, 0],
                 }),
               },
             ],

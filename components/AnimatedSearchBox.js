@@ -41,6 +41,7 @@ class AnimatedSearchBox extends React.Component {
     this.state = {
       animation: new Animated.Value(0),
       active: false,
+      textInput: React.createRef(),
     };
   }
 
@@ -48,8 +49,17 @@ class AnimatedSearchBox extends React.Component {
     handleCityInput: PropTypes.func,
   };
 
+  focusTextInput = () => {
+    this.state.textInput.current.focus();
+  };
+
+  blurTextInput = () => {
+    this.state.textInput.current.blur();
+  };
+
   onPress = () => {
     if (this.state.active === true) {
+      this.blurTextInput();
       Animated.timing(this.state.animation, {
         toValue: 0,
         duration: 800,
@@ -62,6 +72,7 @@ class AnimatedSearchBox extends React.Component {
         duration: 800,
         useNativeDriver: false,
       }).start();
+      this.focusTextInput();
       this.setState({ active: true });
     }
   };
@@ -85,6 +96,7 @@ class AnimatedSearchBox extends React.Component {
               this.props.handleCityInput(e);
               this.onPress();
             }}
+            ref={this.state.textInput}
             autoCorrect={false}
             placeholderTextColor="#fff"
             style={
