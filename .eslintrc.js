@@ -1,6 +1,6 @@
 module.exports = {
   parser: 'babel-eslint',
-  plugins: ['react', 'react-native', 'prettier'],
+  plugins: ['react', 'react-native', 'prettier', 'jest'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -21,9 +21,11 @@ module.exports = {
   ],
   rules: {
     'arrow-body-style': 'warn',
-    // 'react-native/no-inline-styles': 0,
     'object-curly-newline': 0,
-    // 'react/prop-types': 0,
     'prettier/prettier': 'error',
+  },
+
+  env: {
+    'jest/globals': true,
   },
 };

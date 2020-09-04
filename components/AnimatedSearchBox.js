@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   searchBox: {
-    backgroundColor: 'rgba(95, 158, 160, 0.4)',
+    backgroundColor: 'rgba(100, 100, 100, 0.3)',
     height: 50,
   },
   inputActive: {

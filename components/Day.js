@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   },
   block: {
     flex: 1,
-    // backgroundColor: 'rgba(0,0,100,0.4)',
     justifyContent: 'center',
     alignItems: 'center',
   },

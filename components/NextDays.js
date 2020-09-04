@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 50,
     padding: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
   },
   section: {
     flex: 1,

@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#fff",
+      "borderRightWidth": 1,
+      "flex": 1,
+      "justifyContent": "center",
+      "opacity": 0,
+      "paddingHorizontal": "2%",
+      "transform": Array [
+        Object {
+          "translateY": 35,
+        },
+      ],
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Roboto",
+        "fontSize": 18,
+        "textAlign": "center",
+      }
+    }
+  >
+    SOB.
+  </Text>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "uri": "http://openweathermap.org/img/wn/10d@2x.png",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "height": 55,
+            "width": 55,
+          },
+          Object {
+            "alignSelf": "flex-start",
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#fff",
+            "fontFamily": "Roboto",
+            "fontSize": 14,
+            "textAlign": "center",
+          },
+          Object {
+            "alignSelf": "flex-start",
+          },
+        ]
+      }
+    >
+      18℃
+    </Text>
+    <View
+      style={
+        Object {
+          "borderColor": "rgba(255, 255, 255, 0.2)",
+          "borderTopWidth": 1,
+          "height": 0,
+          "transform": Array [
+            Object {
+              "rotate": "-45deg",
+            },
+          ],
+          "width": "100%",
+        }
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#fff",
+            "fontFamily": "Roboto",
+            "fontSize": 14,
+            "textAlign": "center",
+          },
+          Object {
+            "alignSelf": "flex-end",
+          },
+        ]
+      }
+    >
+      11℃
+    </Text>
+    <View>
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "uri": "http://openweathermap.org/img/wn/04n@2x.png",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "height": 55,
+              "width": 55,
+            },
+            Object {
+              "alignSelf": "flex-end",
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
