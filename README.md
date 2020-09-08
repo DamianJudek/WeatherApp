@@ -8,7 +8,7 @@ This application was created in order to increase my working knowledge of React 
 
 ## Screenshots
 
-![Example screenshot](./assets/screenshots/screenshot.jpg)
+<img width="40%" src="./assets/screenshots/screenshot.jpg">
 
 ## Technologies
 
