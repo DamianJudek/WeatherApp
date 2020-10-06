@@ -14,22 +14,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const Hour = (props) => {
-  const { weather, style } = props;
-  return (
-    <View style={style}>
-      <Text style={styles.baseText}>{weather.hour}</Text>
-      <Image
-        style={styles.icon}
-        resizeMode="contain"
-        source={{
-          uri: `http://openweathermap.org/img/wn/${weather.icon}@2x.png`,
-        }}
-      />
-      <Text style={styles.baseText}>{`${weather.temp}\u2103`}</Text>
-    </View>
-  );
-};
+const Hour = ({ weather, style }) => (
+  <View style={style}>
+    <Text style={styles.baseText}>{weather.hour}</Text>
+    <Image
+      style={styles.icon}
+      resizeMode="contain"
+      source={{
+        uri: `http://openweathermap.org/img/wn/${weather.icon}@2x.png`,
+      }}
+    />
+    <Text style={styles.baseText}>{`${weather.temp}\u2103`}</Text>
+  </View>
+);
+
 Hour.propTypes = {
   weather: PropTypes.object,
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),

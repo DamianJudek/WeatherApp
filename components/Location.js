@@ -34,29 +34,21 @@ const styles = StyleSheet.create({
   },
 });
 
-class Location extends React.Component {
-  static propTypes = {
-    handleCityInput: PropTypes.func,
-    getLocation: PropTypes.func,
-  };
+const Location = ({ handleCityInput, getLocation }) => (
+  <View style={styles.container}>
+    <ASBox handleCityInput={handleCityInput} />
+    <TouchableHighlight
+      onPress={getLocation}
+      underlayColor="rgba(95, 158, 160, 0.3)"
+      style={styles.iconContainer}>
+      <Image style={styles.icon} resizeMode="contain" source={locationIcon} />
+    </TouchableHighlight>
+  </View>
+);
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <ASBox handleCityInput={this.props.handleCityInput} />
-        <TouchableHighlight
-          onPress={this.props.getLocation}
-          underlayColor="rgba(95, 158, 160, 0.3)"
-          style={styles.iconContainer}>
-          <Image
-            style={styles.icon}
-            resizeMode="contain"
-            source={locationIcon}
-          />
-        </TouchableHighlight>
-      </View>
-    );
-  }
-}
+Location.propTypes = {
+  handleCityInput: PropTypes.func,
+  getLocation: PropTypes.func,
+};
 
 export default Location;

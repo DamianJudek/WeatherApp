@@ -24,29 +24,19 @@ const styles = StyleSheet.create({
   },
 });
 
-class MainPanel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const MainPanel = ({ currentWeather, nearestHours, city }) => (
+  <View style={styles.container}>
+    <View style={styles.container}>
+      <TodayMain city={city} weather={currentWeather} />
+      <TodayPerHour weather={nearestHours} />
+    </View>
+  </View>
+);
 
-  static propTypes = {
-    currentWeather: PropTypes.object,
-    nearestHours: PropTypes.array,
-    city: PropTypes.string,
-  };
-
-  render() {
-    const { currentWeather, nearestHours, city } = this.props;
-    return (
-      <View style={styles.container}>
-        <View style={styles.container}>
-          <TodayMain city={city} weather={currentWeather} />
-          <TodayPerHour weather={nearestHours} />
-        </View>
-      </View>
-    );
-  }
-}
+MainPanel.propTypes = {
+  currentWeather: PropTypes.object,
+  nearestHours: PropTypes.array,
+  city: PropTypes.string,
+};
 
 export default MainPanel;
