@@ -40,8 +40,11 @@ class AnimatedSearchBox extends React.Component {
     super(props);
     this.state = {
       animation: new Animated.Value(0),
-      active: false,
+
       textInput: React.createRef(),
+
+      inputVisible: false,
+
     };
   }
 
@@ -58,22 +61,28 @@ class AnimatedSearchBox extends React.Component {
   };
 
   onPress = () => {
-    if (this.state.active === true) {
-      this.blurTextInput();
+
+ 
+
+    if (this.state.inputVisible === true) {
+     this.blurTextInput();
       Animated.timing(this.state.animation, {
         toValue: 0,
         duration: 800,
         useNativeDriver: false,
       }).start();
-      this.setState({ active: false });
-    } else if (this.state.active === false) {
+      this.setState({ inputVisible: false });
+    } else  {
       Animated.timing(this.state.animation, {
         toValue: 1,
         duration: 800,
         useNativeDriver: false,
       }).start();
+
       this.focusTextInput();
-      this.setState({ active: true });
+
+      this.setState({ inputVisible: true });
+
     }
   };
 
@@ -100,9 +109,11 @@ class AnimatedSearchBox extends React.Component {
             autoCorrect={false}
             placeholderTextColor="#fff"
             style={
+
               this.state.active ? styles.inputActive : styles.inputInactive
+
             }
-            placeholder={this.state.active ? 'Miasto' : ''}
+            placeholder={this.state.inputVisible ? 'Miasto' : ''}
           />
         </Animated.View>
       </>

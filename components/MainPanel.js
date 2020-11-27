@@ -25,29 +25,20 @@ const styles = StyleSheet.create({
   },
 });
 
-class MainPanel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const MainPanel = ({ currentWeather, nearestHours, city }) => (
+  <FadeInView delay={0} style={styles.container}>
+    <View style={styles.container}>
+      <TodayMain city={city} weather={currentWeather} />
+      <TodayPerHour weather={nearestHours} />
+    </View>
+  </FadeInView>
+);
 
-  static propTypes = {
-    currentWeather: PropTypes.object,
-    nearestHours: PropTypes.array,
-    city: PropTypes.string,
-  };
+MainPanel.propTypes = {
+  currentWeather: PropTypes.object,
+  nearestHours: PropTypes.array,
+  city: PropTypes.string,
+};
 
-  render() {
-    const { currentWeather, nearestHours, city } = this.props;
-    return (
-      <FadeInView delay={0} style={styles.container}>
-        <View style={styles.container}>
-          <TodayMain city={city} weather={currentWeather} />
-          <TodayPerHour weather={nearestHours} />
-        </View>
-      </FadeInView>
-    );
-  }
-}
 
 export default MainPanel;

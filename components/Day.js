@@ -44,11 +44,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const Day = (props) => {
-  const { weather, style } = props;
-  return (
-    <SlideInView delay={900} style={style}>
-      <Text style={styles.baseText}>{weather.name}</Text>
+
+const Day = ({ weather, style }) => (
+  <SlideInView delay={900} style={style}>
+    <Text style={styles.baseText}>{weather.name}</Text>
+
+
 
       <View style={styles.block}>
         <Image
@@ -79,9 +80,11 @@ const Day = (props) => {
           />
         </View>
       </View>
+
     </SlideInView>
   );
-};
+
+
 Day.propTypes = {
   weather: PropTypes.object,
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),

@@ -35,7 +35,6 @@ export default class Weather extends React.Component {
       longitude: null,
       cityName: null,
       weatherFetched: false,
-      phoneLocated: false,
       weather: {
         days: [],
         city: null,
@@ -46,7 +45,7 @@ export default class Weather extends React.Component {
   }
 
   static propTypes = {
-    hasLocationPermission: PropTypes.bool,
+    isLocationPermission: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -58,7 +57,7 @@ export default class Weather extends React.Component {
   }
 
   getLocation = () => {
-    if (this.props.hasLocationPermission) {
+    if (this.props.isLocationPermission) {
       Geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
@@ -73,8 +72,7 @@ export default class Weather extends React.Component {
   };
 
   extractWeatherData = (data) => {
-    const weatherPerHours = [];
-    data.forEach((weatherLog) => {
+    const weatherPerHours = data.map((weatherLog) => {
       const hour = {
         temp: parseInt(weatherLog.main.temp, 10),
         humidity: weatherLog.main.humidity,
@@ -84,7 +82,7 @@ export default class Weather extends React.Component {
         icon: weatherLog.weather[0].icon,
         dayNumber: new Date(weatherLog.dt * 1000).getDay(),
       };
-      weatherPerHours.push(hour);
+      return hour;
     });
     return weatherPerHours;
   };
@@ -111,24 +109,26 @@ export default class Weather extends React.Component {
     return null;
   };
 
-  parseWeatherData = (data) => {
+  parseWeatherData = ({ city: { name }, list }) => {
     const weather = {};
     const days = ['NIEDZ.', 'PON.', 'WT.', 'ŚR.', 'CZW.', 'PT.', 'SOB.'];
-    weather.city = data.city.name;
+    weather.city = name;
     weather.days = [];
-    const extractedData = this.extractWeatherData(data.list);
+    const extractedData = this.extractWeatherData(list);
     [weather.currenWeather] = extractedData;
     weather.nearestHours = extractedData.slice(1, 5);
     let daysCounter = 0;
     for (let i = 0; i < extractedData.length; i += 1) {
       if (extractedData[i].hour === '00:00') {
         const day = {};
-        day.maxTemp = extractedData[i + 5].temp;
-        day.minTemp = extractedData[i + 9].temp;
-        day.iconDay = extractedData[i + 5].icon;
-        day.iconNight = extractedData[i + 9].icon;
+        const midday = extractedData[i + 5];
+        const night = extractedData[i + 9];
+        day.maxTemp = midday.temp;
+        day.minTemp = night.temp;
+        day.iconDay = midday.icon;
+        day.iconNight = night.icon;
         daysCounter += 1;
-        day.name = days[extractedData[i + 5].dayNumber];
+        day.name = days[midday.dayNumber];
         weather.days.push(day);
       }
       if (daysCounter === 4) {
