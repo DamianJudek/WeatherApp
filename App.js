@@ -36,12 +36,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasLocationPermission: false,
+      isLocationPermission: false,
     };
   }
 
   requestLocationPermission = async () => {
-    const granted = await PermissionsAndroid.request(
+    const fineLocationPermission = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
         title: 'Hey! We need your permission to use your location',
@@ -51,11 +51,10 @@ class App extends React.Component {
         buttonPositive: 'OK',
       },
     );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      this.setState({ hasLocationPermission: true });
-    } else {
-      this.setState({ hasLocationPermission: false });
-    }
+    this.setState({
+      isLocationPermission:
+        fineLocationPermission === PermissionsAndroid.RESULTS.GRANTED,
+    });
   };
 
   componentDidMount() {
@@ -70,7 +69,7 @@ class App extends React.Component {
           source={bgImage}
           resizeMode="cover">
           <Weather
-            hasLocationPermission={this.state.hasLocationPermission}></Weather>
+            isLocationPermission={this.state.isLocationPermission}></Weather>
         </ImageBackground>
       </View>
     );

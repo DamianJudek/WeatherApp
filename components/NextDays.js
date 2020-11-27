@@ -24,18 +24,26 @@ const styles = StyleSheet.create({
   },
 });
 
-class NextDays extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const NextDays = ({ days }) => {
+  const [firstDay, secondDay, thirdDay, fourthDay] = days;
+  return (
+    <View style={styles.container}>
+      <Day style={styles.section} weather={firstDay} />
+      <Day style={styles.section} weather={secondDay} />
+      <Day style={styles.section} weather={thirdDay} />
+      <Day
+        style={[styles.section, { borderRightWidth: 0 }]}
+        weather={fourthDay}
+      />
+    </View>
+  );
+};
 
-  static propTypes = {
-    days: PropTypes.array,
-  };
+
+
 
   render() {
-    const [first, second, third, fourth] = this.props.days;
+    const [first, second, third, fourth] = days;
     return (
       <View style={styles.container}>
         <Day style={styles.section} weather={first} />
@@ -46,5 +54,10 @@ class NextDays extends React.Component {
     );
   }
 }
+
+NextDays.propTypes = {
+  days: PropTypes.array,
+};
+
 
 export default NextDays;

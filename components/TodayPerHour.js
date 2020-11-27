@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 50,
     backgroundColor: 'rgba(220, 220, 220, 0.2)',
-    // backgroundColor: 'rgba(30, 30, 30, 0.4)',
 
     padding: 15,
   },
@@ -26,9 +25,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const TodayPerHour = (props) => {
-  const { weather } = props;
 
+const TodayPerHour = ({ weather }) => {
+  
   return (
     <View style={styles.container}>
       <Hour weather={weather[0]} style={styles.section} />

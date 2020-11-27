@@ -46,15 +46,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const TodayMain = (props) => {
-  const { humidity, temp, wind, description, icon } = props.weather;
-  const { city } = props;
-  return (
-    <View style={styles.container}>
-      <View style={styles.section}>
-        <Text style={[styles.baseText, styles.heading]}>{city}</Text>
-      </View>
-
+const TodayMain = ({
+  weather: { humidity, temp, wind, description, icon },
+  city,
+}) => (
+  <View style={styles.container}>
+    <View style={styles.section}>
+      <Text style={[styles.baseText, styles.heading]}>{city}</Text>
+    </View>
       <View style={[styles.section, styles.wide]}>
         <View style={[styles.subSection, styles.wide]}>
           <Text style={[styles.baseText, styles.bigText]}>
@@ -70,32 +69,26 @@ const TodayMain = (props) => {
             }}
           />
         </View>
+    </View>
+    <View style={styles.section}>
+      <Text style={[styles.baseText, styles.heading]}>{description}</Text>
+    </View>
+    <View style={styles.section}>
+      <View style={styles.subSection}>
+        <Image style={styles.icon} resizeMode="contain" source={humidityIcon} />
+        <Text style={[styles.baseText, styles.heading]}>{`${humidity}%`}</Text>
       </View>
-
-      <View style={styles.section}>
-        <Text style={[styles.baseText, styles.heading]}>{description}</Text>
-      </View>
-      <View style={styles.section}>
-        <View style={styles.subSection}>
-          <Image
-            style={styles.icon}
-            resizeMode="contain"
-            source={humidityIcon}
-          />
-          <Text
-            style={[styles.baseText, styles.heading]}>{`${humidity}%`}</Text>
-        </View>
-        <View style={styles.subSection}>
-          <Image style={styles.icon} resizeMode="contain" source={windIcon} />
-          <Text style={[styles.baseText, styles.heading]}>{`${wind}m/s`}</Text>
-        </View>
+      <View style={styles.subSection}>
+        <Image style={styles.icon} resizeMode="contain" source={windIcon} />
+        <Text style={[styles.baseText, styles.heading]}>{`${wind}m/s`}</Text>
       </View>
     </View>
-  );
-};
+  </View>
+);
 
 TodayMain.propTypes = {
   weather: PropTypes.object,
   city: PropTypes.string,
 };
+
 export default TodayMain;

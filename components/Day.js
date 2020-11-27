@@ -44,11 +44,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const Day = (props) => {
-  const { weather, style } = props;
-  return (
-    <View style={style}>
-      <Text style={styles.baseText}>{weather.name}</Text>
+const Day = ({ weather, style }) => (
+  <View style={style}>
+    <Text style={styles.baseText}>{weather.name}</Text>
+
 
       <View style={styles.block}>
         <Image
@@ -79,9 +78,11 @@ const Day = (props) => {
           />
         </View>
       </View>
+
     </View>
-  );
-};
+  </View>
+);
+
 Day.propTypes = {
   weather: PropTypes.object,
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),

@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Hour = (props) => {
-  const { weather, style } = props;
+
+const Hour = ({ weather, style }) => {
   return (
     <FadeInView style={style}>
       <Text style={styles.baseText}>{weather.hour}</Text>
@@ -31,6 +31,7 @@ const Hour = (props) => {
     </FadeInView>
   );
 };
+
 Hour.propTypes = {
   weather: PropTypes.object,
   style: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
