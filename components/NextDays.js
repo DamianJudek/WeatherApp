@@ -1,29 +1,43 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-
-class NextDays extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>To jest panel nastepnych dni</Text>
-      </View>
-    );
-  }
-}
+import { View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import Day from './Day';
 
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
     borderRadius: 50,
-
+    padding: 10,
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
+  section: {
+    flex: 1,
+    borderRightWidth: 1,
+    borderColor: '#fff',
+    justifyContent: 'center',
+    padding: 10,
+  },
 });
+
+const NextDays = ({ days }) => {
+  const [firstDay, secondDay, thirdDay, fourthDay] = days;
+  return (
+    <View style={styles.container}>
+      <Day style={styles.section} weather={firstDay} />
+      <Day style={styles.section} weather={secondDay} />
+      <Day style={styles.section} weather={thirdDay} />
+      <Day
+        style={[styles.section, { borderRightWidth: 0 }]}
+        weather={fourthDay}
+      />
+    </View>
+  );
+};
+
+NextDays.propTypes = {
+  days: PropTypes.array,
+};
+
 export default NextDays;

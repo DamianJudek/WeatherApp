@@ -1,53 +1,9 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import humidityIcon from '../assets/icons/humidity.png';
+import windIcon from '../assets/icons/wind.png';
 
-const TodayMain = (props) => {
-  const {humidity, temp, wind, description, icon} = props.weather;
-  return (
-    <View style={styles.container}>
-      <View style={styles.section}>
-        <Text style={[styles.baseText, styles.heading]}>{props.city}</Text>
-      </View>
-
-      <View style={[styles.section, {flex: 2}]}>
-        <View style={[styles.subSection, {flex: 2}]}>
-          <Text style={[styles.baseText, styles.bigText]}>
-            {`${temp}\u2103`}
-          </Text>
-        </View>
-        <View style={[styles.subSection, {justifyContent: 'flex-start'}]}>
-          <Image
-            style={styles.bigIcon}
-            resizeMode="contain"
-            source={{
-              uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
-            }}></Image>
-        </View>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={[styles.baseText, styles.heading]}>{description}</Text>
-      </View>
-      <View style={styles.section}>
-        <View style={styles.subSection}>
-          <Image
-            style={styles.icon}
-            resizeMode="contain"
-            source={require('../assets/icons/humidity.png')}></Image>
-          <Text
-            style={[styles.baseText, styles.heading]}>{`${humidity}%`}</Text>
-        </View>
-        <View style={styles.subSection}>
-          <Image
-            style={styles.icon}
-            resizeMode="contain"
-            source={require('../assets/icons/wind.png')}></Image>
-          <Text style={[styles.baseText, styles.heading]}>{`${wind}m/s`}</Text>
-        </View>
-      </View>
-    </View>
-  );
-};
 const styles = StyleSheet.create({
   container: {
     flex: 3,
@@ -89,4 +45,50 @@ const styles = StyleSheet.create({
     width: 120,
   },
 });
+
+const TodayMain = ({
+  weather: { humidity, temp, wind, description, icon },
+  city,
+}) => (
+  <View style={styles.container}>
+    <View style={styles.section}>
+      <Text style={[styles.baseText, styles.heading]}>{city}</Text>
+    </View>
+
+    <View style={[styles.section, { flex: 2 }]}>
+      <View style={[styles.subSection, { flex: 2 }]}>
+        <Text style={[styles.baseText, styles.bigText]}>{`${temp}\u2103`}</Text>
+      </View>
+      <View style={[styles.subSection, { justifyContent: 'flex-start' }]}>
+        <Image
+          style={styles.bigIcon}
+          resizeMode="contain"
+          source={{
+            uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
+          }}
+        />
+      </View>
+    </View>
+
+    <View style={styles.section}>
+      <Text style={[styles.baseText, styles.heading]}>{description}</Text>
+    </View>
+    <View style={styles.section}>
+      <View style={styles.subSection}>
+        <Image style={styles.icon} resizeMode="contain" source={humidityIcon} />
+        <Text style={[styles.baseText, styles.heading]}>{`${humidity}%`}</Text>
+      </View>
+      <View style={styles.subSection}>
+        <Image style={styles.icon} resizeMode="contain" source={windIcon} />
+        <Text style={[styles.baseText, styles.heading]}>{`${wind}m/s`}</Text>
+      </View>
+    </View>
+  </View>
+);
+
+TodayMain.propTypes = {
+  weather: PropTypes.object,
+  city: PropTypes.string,
+};
+
 export default TodayMain;

@@ -1,28 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
+import { View, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import PropTypes from 'prop-types';
 import ASBox from './AnimatedSearchBox';
-class Location extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <ASBox handleCityInput={this.props.handleCityInput}></ASBox>
-        <TouchableHighlight
-          onPress={this.props.getLocation}
-          underlayColor="rgba(95, 158, 160, 0.3)"
-          style={styles.iconContainer}>
-          <Image
-            style={styles.icon}
-            resizeMode="contain"
-            source={require('../assets/icons/gps.png')}></Image>
-        </TouchableHighlight>
-      </View>
-    );
-  }
-}
+import locationIcon from '../assets/icons/gps.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,7 +20,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginLeft: 10,
     paddingHorizontal: 20,
     paddingVertical: 5,
     backgroundColor: 'transparent',
@@ -54,4 +33,22 @@ const styles = StyleSheet.create({
     fontSize: 35,
   },
 });
+
+const Location = ({ handleCityInput, getLocation }) => (
+  <View style={styles.container}>
+    <ASBox handleCityInput={handleCityInput} />
+    <TouchableHighlight
+      onPress={getLocation}
+      underlayColor="rgba(95, 158, 160, 0.3)"
+      style={styles.iconContainer}>
+      <Image style={styles.icon} resizeMode="contain" source={locationIcon} />
+    </TouchableHighlight>
+  </View>
+);
+
+Location.propTypes = {
+  handleCityInput: PropTypes.func,
+  getLocation: PropTypes.func,
+};
+
 export default Location;

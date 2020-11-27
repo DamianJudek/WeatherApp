@@ -1,41 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import TodayMain from './TodayMain';
 import TodayPerHour from './TodayPerHour';
 
-class MainPanel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    const weather = this.props.weather;
-    const weatherFetched = this.props.weatherFetched;
-    return (
-      <View style={styles.container}>
-        {weatherFetched ? (
-          <View style={styles.container}>
-            <TodayMain city={this.props.city} weather={weather[0]} />
-            <TodayPerHour weather={weather} />
-          </View>
-        ) : (
-          <>
-            <Text style={[styles.baseText, styles.heading]}>
-              Wyszukaj miasto
-            </Text>
-            <Text
-              style={[{textAlign: 'center'}, styles.baseText, styles.thinText]}>
-              lub
-            </Text>
-            <Text style={[styles.baseText, styles.heading]}>
-              użyj lokalizacji
-            </Text>
-          </>
-        )}
-      </View>
-    );
-  }
-}
 const styles = StyleSheet.create({
   container: {
     flex: 5,
@@ -55,5 +23,20 @@ const styles = StyleSheet.create({
     fontWeight: '100',
   },
 });
+
+const MainPanel = ({ currentWeather, nearestHours, city }) => (
+  <View style={styles.container}>
+    <View style={styles.container}>
+      <TodayMain city={city} weather={currentWeather} />
+      <TodayPerHour weather={nearestHours} />
+    </View>
+  </View>
+);
+
+MainPanel.propTypes = {
+  currentWeather: PropTypes.object,
+  nearestHours: PropTypes.array,
+  city: PropTypes.string,
+};
 
 export default MainPanel;
