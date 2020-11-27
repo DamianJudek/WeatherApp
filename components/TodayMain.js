@@ -54,21 +54,19 @@ const TodayMain = ({
     <View style={styles.section}>
       <Text style={[styles.baseText, styles.heading]}>{city}</Text>
     </View>
-      <View style={[styles.section, styles.wide]}>
-        <View style={[styles.subSection, styles.wide]}>
-          <Text style={[styles.baseText, styles.bigText]}>
-            {`${temp}\u2103`}
-          </Text>
-        </View>
-        <View style={styles.subSection}>
-          <Image
-            style={styles.bigIcon}
-            resizeMode="contain"
-            source={{
-              uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
-            }}
-          />
-        </View>
+    <View style={[styles.section, styles.wide]}>
+      <View style={[styles.subSection, styles.wide]}>
+        <Text style={[styles.baseText, styles.bigText]}>{`${temp}\u2103`}</Text>
+      </View>
+      <View style={styles.subSection}>
+        <Image
+          style={styles.bigIcon}
+          resizeMode="contain"
+          source={{
+            uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
+          }}
+        />
+      </View>
     </View>
     <View style={styles.section}>
       <Text style={[styles.baseText, styles.heading]}>{description}</Text>

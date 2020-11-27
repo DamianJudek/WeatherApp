@@ -40,5 +40,4 @@ MainPanel.propTypes = {
   city: PropTypes.string,
 };
 
-
 export default MainPanel;

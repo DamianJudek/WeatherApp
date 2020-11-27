@@ -44,46 +44,41 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const Day = ({ weather, style }) => (
   <SlideInView delay={900} style={style}>
     <Text style={styles.baseText}>{weather.name}</Text>
 
-
-
-      <View style={styles.block}>
+    <View style={styles.block}>
+      <Image
+        style={[styles.icon, styles.floatleft]}
+        resizeMode="contain"
+        source={{
+          uri: `http://openweathermap.org/img/wn/${weather.iconDay}@2x.png`,
+        }}
+      />
+      <Text
+        style={[
+          styles.smallText,
+          styles.floatleft,
+        ]}>{`${weather.maxTemp}\u2103`}</Text>
+      <View style={styles.partition}></View>
+      <Text
+        style={[
+          styles.smallText,
+          styles.floatRight,
+        ]}>{`${weather.minTemp}\u2103`}</Text>
+      <View>
         <Image
-          style={[styles.icon, styles.floatleft]}
+          style={[styles.icon, styles.floatRight]}
           resizeMode="contain"
           source={{
-            uri: `http://openweathermap.org/img/wn/${weather.iconDay}@2x.png`,
+            uri: `http://openweathermap.org/img/wn/${weather.iconNight}@2x.png`,
           }}
         />
-        <Text
-          style={[
-            styles.smallText,
-            styles.floatleft,
-          ]}>{`${weather.maxTemp}\u2103`}</Text>
-        <View style={styles.partition}></View>
-        <Text
-          style={[
-            styles.smallText,
-            styles.floatRight,
-          ]}>{`${weather.minTemp}\u2103`}</Text>
-        <View>
-          <Image
-            style={[styles.icon, styles.floatRight]}
-            resizeMode="contain"
-            source={{
-              uri: `http://openweathermap.org/img/wn/${weather.iconNight}@2x.png`,
-            }}
-          />
-        </View>
       </View>
-
-    </SlideInView>
-  );
-
+    </View>
+  </SlideInView>
+);
 
 Day.propTypes = {
   weather: PropTypes.object,

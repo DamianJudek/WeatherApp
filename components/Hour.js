@@ -15,22 +15,19 @@ const styles = StyleSheet.create({
   },
 });
 
-
-const Hour = ({ weather, style }) => {
-  return (
-    <SlideInView delay={900} style={style}>
-      <Text style={styles.baseText}>{weather.hour}</Text>
-      <Image
-        style={styles.icon}
-        resizeMode="contain"
-        source={{
-          uri: `http://openweathermap.org/img/wn/${weather.icon}@2x.png`,
-        }}
-      />
-      <Text style={styles.baseText}>{`${weather.temp}\u2103`}</Text>
-    </SlideInView>
-  );
-};
+const Hour = ({ weather, style }) => (
+  <SlideInView delay={900} style={style}>
+    <Text style={styles.baseText}>{weather.hour}</Text>
+    <Image
+      style={styles.icon}
+      resizeMode="contain"
+      source={{
+        uri: `http://openweathermap.org/img/wn/${weather.icon}@2x.png`,
+      }}
+    />
+    <Text style={styles.baseText}>{`${weather.temp}\u2103`}</Text>
+  </SlideInView>
+);
 
 Hour.propTypes = {
   weather: PropTypes.object,

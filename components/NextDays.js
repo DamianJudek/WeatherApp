@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 const NextDays = ({ days }) => {
   const [firstDay, secondDay, thirdDay, fourthDay] = days;
   return (
-    <View style={styles.container}>
+    <FadeInView delay={600} style={styles.container}>
       <Day style={styles.section} weather={firstDay} />
       <Day style={styles.section} weather={secondDay} />
       <Day style={styles.section} weather={thirdDay} />
@@ -36,29 +36,12 @@ const NextDays = ({ days }) => {
         style={[styles.section, { borderRightWidth: 0 }]}
         weather={fourthDay}
       />
-    </View>
+    </FadeInView>
   );
 };
-
-
-
-
-  render() {
-    const [first, second, third, fourth] = days;
-    return (
-      <FadeInView delay={600} style={styles.container}>
-        <Day style={styles.section} weather={first} />
-        <Day style={styles.section} weather={second} />
-        <Day style={styles.section} weather={third} />
-        <Day style={[styles.section, styles.lastSection]} weather={fourth} />
-      </FadeInView>
-    );
-  }
-}
 
 NextDays.propTypes = {
   days: PropTypes.array,
 };
-
 
 export default NextDays;

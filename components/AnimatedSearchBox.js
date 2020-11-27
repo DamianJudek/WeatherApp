@@ -40,11 +40,8 @@ class AnimatedSearchBox extends React.Component {
     super(props);
     this.state = {
       animation: new Animated.Value(0),
-
       textInput: React.createRef(),
-
-      inputVisible: false,
-
+      isInputVisible: false,
     };
   }
 
@@ -60,19 +57,16 @@ class AnimatedSearchBox extends React.Component {
     this.state.textInput.current.blur();
   };
 
-  onPress = () => {
-
- 
-
-    if (this.state.inputVisible === true) {
-     this.blurTextInput();
+  changeInputVisibility = () => {
+    if (this.state.isInputVisible === true) {
+      this.blurTextInput();
       Animated.timing(this.state.animation, {
         toValue: 0,
         duration: 800,
         useNativeDriver: false,
       }).start();
-      this.setState({ inputVisible: false });
-    } else  {
+      this.setState({ isInputVisible: false });
+    } else {
       Animated.timing(this.state.animation, {
         toValue: 1,
         duration: 800,
@@ -81,8 +75,7 @@ class AnimatedSearchBox extends React.Component {
 
       this.focusTextInput();
 
-      this.setState({ inputVisible: true });
-
+      this.setState({ isInputVisible: true });
     }
   };
 
@@ -90,10 +83,15 @@ class AnimatedSearchBox extends React.Component {
     return (
       <>
         <TouchableHighlight
-          onPress={this.onPress}
+          onPress={this.changeInputVisibility}
           underlayColor="rgba(95, 158, 160, 0.3)"
           style={styles.iconContainer}>
-          <Image style={styles.icon} resizeMode="contain" source={searchIcon} />
+          <Image
+            onClick={this.changeInputVisibility}
+            style={styles.icon}
+            resizeMode="contain"
+            source={searchIcon}
+          />
         </TouchableHighlight>
         <Animated.View
           style={{
@@ -103,17 +101,17 @@ class AnimatedSearchBox extends React.Component {
           <TextInput
             onSubmitEditing={(e) => {
               this.props.handleCityInput(e);
-              this.onPress();
+              this.changeInputVisibility();
             }}
             ref={this.state.textInput}
             autoCorrect={false}
             placeholderTextColor="#fff"
             style={
-
-              this.state.active ? styles.inputActive : styles.inputInactive
-
+              this.state.isInputVisible
+                ? styles.inputActive
+                : styles.inputInactive
             }
-            placeholder={this.state.inputVisible ? 'Miasto' : ''}
+            placeholder={this.state.isInputVisible ? 'Miasto' : ''}
           />
         </Animated.View>
       </>
