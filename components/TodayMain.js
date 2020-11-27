@@ -8,8 +8,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 3,
     backgroundColor: 'rgba(30, 30, 30, 0.4)',
-    // backgroundColor: 'rgba(0, 0, 0, 0.4)',
-
     flexDirection: 'column',
     borderRadius: 50,
     marginVertical: 10,
@@ -27,6 +25,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
   },
+  wide: {
+    flex: 2,
+  },
   baseText: {
     fontFamily: 'Roboto',
     color: '#fff',
@@ -36,13 +37,12 @@ const styles = StyleSheet.create({
     fontSize: 95,
   },
   icon: {
-    height: 20,
-    width: 20,
+    height: '60%',
     marginRight: 10,
   },
   bigIcon: {
-    height: 120,
-    width: 120,
+    height: '100%',
+    width: '100%',
   },
 });
 
@@ -54,22 +54,22 @@ const TodayMain = ({
     <View style={styles.section}>
       <Text style={[styles.baseText, styles.heading]}>{city}</Text>
     </View>
-
-    <View style={[styles.section, { flex: 2 }]}>
-      <View style={[styles.subSection, { flex: 2 }]}>
-        <Text style={[styles.baseText, styles.bigText]}>{`${temp}\u2103`}</Text>
-      </View>
-      <View style={[styles.subSection, { justifyContent: 'flex-start' }]}>
-        <Image
-          style={styles.bigIcon}
-          resizeMode="contain"
-          source={{
-            uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
-          }}
-        />
-      </View>
+      <View style={[styles.section, styles.wide]}>
+        <View style={[styles.subSection, styles.wide]}>
+          <Text style={[styles.baseText, styles.bigText]}>
+            {`${temp}\u2103`}
+          </Text>
+        </View>
+        <View style={styles.subSection}>
+          <Image
+            style={styles.bigIcon}
+            resizeMode="contain"
+            source={{
+              uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
+            }}
+          />
+        </View>
     </View>
-
     <View style={styles.section}>
       <Text style={[styles.baseText, styles.heading]}>{description}</Text>
     </View>

@@ -20,19 +20,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  lastSection: {
+    borderRightWidth: 0,
+  },
 });
 
-const TodayPerHour = ({ weather }) => (
-  <View style={styles.container}>
-    <Hour weather={weather[0]} style={styles.section} />
-    <Hour weather={weather[1]} style={styles.section} />
-    <Hour weather={weather[2]} style={styles.section} />
-    <Hour
-      weather={weather[3]}
-      style={[styles.section, { borderRightWidth: 0 }]}
-    />
-  </View>
-);
+
+const TodayPerHour = ({ weather }) => {
+  
+  return (
+    <View style={styles.container}>
+      <Hour weather={weather[0]} style={styles.section} />
+      <Hour weather={weather[1]} style={styles.section} />
+      <Hour weather={weather[2]} style={styles.section} />
+      <Hour weather={weather[3]} style={[styles.section, styles.lastSection]} />
+    </View>
+  );
+};
 
 TodayPerHour.propTypes = {
   weather: PropTypes.array,

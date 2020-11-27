@@ -25,49 +25,60 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
+  partition: {
+    width: '100%',
+    height: 0,
+    borderTopWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    transform: [
+      {
+        rotate: '-45deg',
+      },
+    ],
+  },
+  block: {
+    flex: 1,
+    // backgroundColor: 'rgba(0,0,100,0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 const Day = ({ weather, style }) => (
   <View style={style}>
     <Text style={styles.baseText}>{weather.name}</Text>
 
-    <View
-      style={{
-        flexDirection: 'column',
-        flex: 1,
-      }}>
-      <Image
-        style={styles.icon}
-        resizeMode="contain"
-        source={{
-          uri: `http://openweathermap.org/img/wn/${weather.iconDay}@2x.png`,
-        }}
-      />
-      <Text
-        style={[
-          styles.smallText,
-          styles.floatleft,
-        ]}>{`${weather.maxTemp}\u2103`}</Text>
-      <View
-        style={{
-          width: '100%',
-          height: 0,
-          borderTopWidth: 1,
-          borderColor: 'rgba(255, 255, 255, 0.1)',
-          rotation: -45,
-        }}></View>
-      <Text
-        style={[
-          styles.smallText,
-          styles.floatRight,
-        ]}>{`${weather.minTemp}\u2103`}</Text>
-      <Image
-        style={[styles.icon, styles.floatRight]}
-        resizeMode="contain"
-        source={{
-          uri: `http://openweathermap.org/img/wn/${weather.iconNight}@2x.png`,
-        }}
-      />
+
+      <View style={styles.block}>
+        <Image
+          style={[styles.icon, styles.floatleft]}
+          resizeMode="contain"
+          source={{
+            uri: `http://openweathermap.org/img/wn/${weather.iconDay}@2x.png`,
+          }}
+        />
+        <Text
+          style={[
+            styles.smallText,
+            styles.floatleft,
+          ]}>{`${weather.maxTemp}\u2103`}</Text>
+        <View style={styles.partition}></View>
+        <Text
+          style={[
+            styles.smallText,
+            styles.floatRight,
+          ]}>{`${weather.minTemp}\u2103`}</Text>
+        <View>
+          <Image
+            style={[styles.icon, styles.floatRight]}
+            resizeMode="contain"
+            source={{
+              uri: `http://openweathermap.org/img/wn/${weather.iconNight}@2x.png`,
+            }}
+          />
+        </View>
+      </View>
+
     </View>
   </View>
 );

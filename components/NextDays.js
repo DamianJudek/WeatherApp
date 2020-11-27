@@ -17,7 +17,10 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     borderColor: '#fff',
     justifyContent: 'center',
-    padding: 10,
+    paddingHorizontal: '2%',
+  },
+  lastSection: {
+    borderRightWidth: 0,
   },
 });
 
@@ -36,8 +39,25 @@ const NextDays = ({ days }) => {
   );
 };
 
+
+
+
+  render() {
+    const [first, second, third, fourth] = days;
+    return (
+      <View style={styles.container}>
+        <Day style={styles.section} weather={first} />
+        <Day style={styles.section} weather={second} />
+        <Day style={styles.section} weather={third} />
+        <Day style={[styles.section, styles.lastSection]} weather={fourth} />
+      </View>
+    );
+  }
+}
+
 NextDays.propTypes = {
   days: PropTypes.array,
 };
+
 
 export default NextDays;

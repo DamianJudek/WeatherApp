@@ -88,7 +88,7 @@ export default class Weather extends React.Component {
   };
 
   savePersistentData = async (key = '', data = '') => {
-    const { storageKey } = this;
+    const { storageKey } = config;
     try {
       await AsyncStorage.setItem(`${storageKey}:${key}`, data);
     } catch (e) {
@@ -97,7 +97,7 @@ export default class Weather extends React.Component {
   };
 
   getPersistentData = async (key) => {
-    const { storageKey } = this;
+    const { storageKey } = config;
     try {
       const value = await AsyncStorage.getItem(`${storageKey}:${key}`);
       if (value !== null) {
@@ -151,13 +151,16 @@ export default class Weather extends React.Component {
             if (response.ok) {
               return response.json();
             }
-            throw new Error(`Api returns code ${response.status}`);
+            throw new Error();
           })
           .then((data) => {
             parseWeatherData(data);
           })
-          .catch((error) => {
-            console.error(error);
+          .catch(() => {
+            Alert.alert(
+              'Uwaga!',
+              'Nie odnaleziono pogody dla żadanej lokalizacji',
+            );
           });
       } else {
         Alert.alert('Uwaga!', 'Brak połączenia internetowego');
