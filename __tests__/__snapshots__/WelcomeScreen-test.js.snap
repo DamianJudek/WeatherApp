@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        },
+        Object {
+          "fontSize": 35,
+        },
+      ]
+    }
+  >
+    Wyszukaj miasto
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Roboto",
+        "fontSize": 18,
+      }
+    }
+  >
+    lub
+  </Text>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        },
+        Object {
+          "fontSize": 35,
+        },
+      ]
+    }
+  >
+    użyj lokalizacji
+  </Text>
+</View>
+`;

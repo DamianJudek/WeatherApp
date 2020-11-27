@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import TodayMain from './TodayMain';
 import TodayPerHour from './TodayPerHour';
+import FadeInView from './FadeInView';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,12 +26,12 @@ const styles = StyleSheet.create({
 });
 
 const MainPanel = ({ currentWeather, nearestHours, city }) => (
-  <View style={styles.container}>
+  <FadeInView delay={0} style={styles.container}>
     <View style={styles.container}>
       <TodayMain city={city} weather={currentWeather} />
       <TodayPerHour weather={nearestHours} />
     </View>
-  </View>
+  </FadeInView>
 );
 
 MainPanel.propTypes = {
@@ -38,5 +39,6 @@ MainPanel.propTypes = {
   nearestHours: PropTypes.array,
   city: PropTypes.string,
 };
+
 
 export default MainPanel;

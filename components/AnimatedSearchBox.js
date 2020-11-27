@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   searchBox: {
-    backgroundColor: 'rgba(95, 158, 160, 0.4)',
+    backgroundColor: 'rgba(100, 100, 100, 0.3)',
     height: 50,
   },
   inputActive: {
@@ -40,7 +40,11 @@ class AnimatedSearchBox extends React.Component {
     super(props);
     this.state = {
       animation: new Animated.Value(0),
+
+      textInput: React.createRef(),
+
       inputVisible: false,
+
     };
   }
 
@@ -48,21 +52,37 @@ class AnimatedSearchBox extends React.Component {
     handleCityInput: PropTypes.func,
   };
 
+  focusTextInput = () => {
+    this.state.textInput.current.focus();
+  };
+
+  blurTextInput = () => {
+    this.state.textInput.current.blur();
+  };
+
   onPress = () => {
+
+ 
+
     if (this.state.inputVisible === true) {
+     this.blurTextInput();
       Animated.timing(this.state.animation, {
         toValue: 0,
         duration: 800,
         useNativeDriver: false,
       }).start();
       this.setState({ inputVisible: false });
-    } else if (this.state.inputVisible === false) {
+    } else  {
       Animated.timing(this.state.animation, {
         toValue: 1,
         duration: 800,
         useNativeDriver: false,
       }).start();
+
+      this.focusTextInput();
+
       this.setState({ inputVisible: true });
+
     }
   };
 
@@ -85,6 +105,7 @@ class AnimatedSearchBox extends React.Component {
               this.props.handleCityInput(e);
               this.onPress();
             }}
+            ref={this.state.textInput}
             autoCorrect={false}
             placeholderTextColor="#fff"
             style={

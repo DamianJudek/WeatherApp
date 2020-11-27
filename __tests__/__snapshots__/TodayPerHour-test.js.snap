@@ -1,0 +1,239 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+      "borderRadius": 50,
+      "flex": 1,
+      "flexDirection": "row",
+      "marginBottom": 10,
+      "opacity": 0,
+      "padding": 15,
+      "transform": Array [
+        Object {
+          "scale": 0.8,
+        },
+      ],
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "#fff",
+        "borderRightWidth": 1,
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 0,
+        "transform": Array [
+          Object {
+            "translateY": 35,
+          },
+        ],
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        }
+      }
+    >
+      21:00
+    </Text>
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "uri": "http://openweathermap.org/img/wn/03n@2x.png",
+        }
+      }
+      style={
+        Object {
+          "height": 60,
+          "width": 60,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        }
+      }
+    >
+      17℃
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "#fff",
+        "borderRightWidth": 1,
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 0,
+        "transform": Array [
+          Object {
+            "translateY": 35,
+          },
+        ],
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        }
+      }
+    >
+      00:00
+    </Text>
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "uri": "http://openweathermap.org/img/wn/04n@2x.png",
+        }
+      }
+      style={
+        Object {
+          "height": 60,
+          "width": 60,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        }
+      }
+    >
+      16℃
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "#fff",
+        "borderRightWidth": 1,
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 0,
+        "transform": Array [
+          Object {
+            "translateY": 35,
+          },
+        ],
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        }
+      }
+    >
+      03:00
+    </Text>
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "uri": "http://openweathermap.org/img/wn/03n@2x.png",
+        }
+      }
+      style={
+        Object {
+          "height": 60,
+          "width": 60,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        }
+      }
+    >
+      15℃
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "#fff",
+        "borderRightWidth": 0,
+        "flex": 1,
+        "justifyContent": "center",
+        "opacity": 0,
+        "transform": Array [
+          Object {
+            "translateY": 35,
+          },
+        ],
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        }
+      }
+    >
+      06:00
+    </Text>
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "uri": "http://openweathermap.org/img/wn/03d@2x.png",
+        }
+      }
+      style={
+        Object {
+          "height": 60,
+          "width": 60,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Roboto",
+          "fontSize": 18,
+        }
+      }
+    >
+      17℃
+    </Text>
+  </View>
+</View>
+`;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated } from 'react-native';
 import PropTypes from 'prop-types';
 
-class FadeInView extends React.Component {
+class SlideInView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +12,7 @@ class FadeInView extends React.Component {
 
   static propTypes = {
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    children: PropTypes.array,
     delay: PropTypes.number,
   };
 
@@ -20,9 +20,9 @@ class FadeInView extends React.Component {
     const { delay } = this.props;
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 300,
-      delay: delay || 0,
+      duration: 750,
       useNativeDriver: true,
+      delay: delay || 0,
     }).start();
   };
 
@@ -39,9 +39,9 @@ class FadeInView extends React.Component {
             opacity: this.state.opacity,
             transform: [
               {
-                scale: this.state.opacity.interpolate({
+                translateY: this.state.opacity.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [0.8, 1],
+                  outputRange: [35, 0],
                 }),
               },
             ],
@@ -53,4 +53,4 @@ class FadeInView extends React.Component {
   }
 }
 
-export default FadeInView;
+export default SlideInView;
